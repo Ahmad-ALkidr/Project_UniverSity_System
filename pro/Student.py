@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import ttk
 from PIL import Image,ImageTk
 class Student:
     def __init__(self, centerFrame):
@@ -38,6 +39,7 @@ class StudentWindow:
         self.Email = Label(self.frameleft, text='Email',font=('tahoma',10,'bold'))
         self.Email.place(x=10, y=140)
 
+
         self.FirstName = Entry(self.frameleft)
         self.FirstName.place(x=100, y=20,width=150,height=30)
         self.LastName = Entry(self.frameleft)
@@ -47,21 +49,44 @@ class StudentWindow:
         self.Email = Entry(self.frameleft)
         self.Email.place(x=100, y=140,width=150,height=30)
 
-        self.add = Button(self.frameleft , text="add")
+
+        self.add = Button(self.frameleft , text="add",bg='#1b9ea4')
         self.add.place(x=30,y=300,width=60,height=40)
-        self.Update = Button(self.frameleft, text="Update")
+        self.Update = Button(self.frameleft, text="Update",bg='#1b9ea4')
         self.Update.place(x=120, y=300,width=60,height=40)
-        self.Delete = Button(self.frameleft, text="Delete")
+        self.Delete = Button(self.frameleft, text="Delete",bg='#1b9ea4')
         self.Delete.place(x=210, y=300,width=60,height=40)
 
-
-
-
-
-
-
-
-
+        # ------------Start right top -----------------------#
         self.frameright = Frame(self.master, width=800, bg='blue')
-        self.frameright.pack(side=LEFT, fill=Y)
+        self.frameright.pack(side=LEFT, fill=BOTH)
+        # ------------Start right top -----------------------#
+        self.framerighttop=Frame(self.frameright , height=50 , pady=5,padx=5)
+        self.framerighttop.pack(fill=X)
 
+        self.searchStudent = Entry(self.framerighttop,fg='#4F4F4F',font=('tahoma',12,'bold'),width=110)
+        self.searchStudent.grid(row=0, column=0, sticky='nsew', padx=10, pady=10)
+        self.ButtonSearch = Button(self.framerighttop,text="Search",fg='#4F4F4F',font=('tahoma',12,'bold'),width=50)
+        self.ButtonSearch.grid(row=0,column=1,sticky='nsew',pady=10,padx=10)
+
+        self.framerighttop.grid_columnconfigure(0, weight=1)
+        self.framerighttop.grid_columnconfigure(1, weight=1)
+
+        # -------------------------- Frame Top View --------------------------#
+        self.frameview = Frame(self.frameright,bg='red')
+        self.frameview.pack(fill=BOTH)
+
+        self.table = ttk.Treeview(self.frameview,columns=("ID","FirstName","LastName","CIN","Email"),show='headings')
+        self.table.pack(fill=BOTH )
+
+        self.table.heading("ID",text="ID")
+        self.table.heading("FirstName", text="FirstName")
+        self.table.heading("LastName", text="LastName")
+        self.table.heading("CIN", text="CIN")
+        self.table.heading("Email", text="Email")
+
+        self.table.column("ID",anchor=W)
+        self.table.column("FirstName",anchor=W)
+        self.table.column("LastName",anchor=W)
+        self.table.column("CIN",anchor=W)
+        self.table.column("Email",anchor=W)
