@@ -65,9 +65,9 @@ class library:
         s = str(t).split('-')
         ss = s[2].split(' ')
 
-        self.DeliveryDate = Calendar(self.frameleft ,selectmode='day', year=int(s[0]),month=int(s[1]),day=int(ss[0]))
+        self.DeliveryDate = Calendar(self.frameleft ,mindate=datetime.today())
         self.DeliveryDate.place(x=130, y=200, width=250, height=200)
-        self.ReturnDate = Calendar(self.frameleft,selectmode='day', year=int(s[0]),month=int(s[1]),day=int(ss[0]))
+        self.ReturnDate = Calendar(self.frameleft,selectmode='day',mindate=datetime.today())
         self.ReturnDate.place(x=130, y=420, width=250, height=200)
 
 
@@ -222,11 +222,10 @@ class library:
                           password='',
                           database="un")
         mycursor = mydp.cursor()
-        sql = ('select * from student where id = ' + self.searchStudent.get())
+        sql = ('select * from library where id = ' + self.searchStudent.get())
         mycursor.execute(sql)
         myresult = mycursor.fetchone()
-        self.table.delete(
-            *self.table.get_children())  # كانت سبب في حدوث خطا اثناء استدعاء الدالة هي لحذف كل سجلات الجدول
+        self.table.delete(*self.table.get_children())  # كانت سبب في حدوث خطا اثناء استدعاء الدالة هي لحذف كل سجلات الجدول
         self.table.insert('', 'end', iid=myresult[0], values=myresult)
         mydp.commit()
         mydp.close()
