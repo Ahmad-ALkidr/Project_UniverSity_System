@@ -1,5 +1,4 @@
 from tkinter import *
-from PIL import Image,ImageTk
 import Student as s
 import Staff as st
 import Library as l
@@ -46,10 +45,6 @@ class University():
 
         self.bottomFrame.grid_columnconfigure(0, weight=1)
         self.bottomFrame.grid_columnconfigure(1, weight=1)
-
-
-
-
 
 
 
