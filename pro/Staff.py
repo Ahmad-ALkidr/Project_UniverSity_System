@@ -3,6 +3,8 @@ from PIL import Image,ImageTk
 from tkinter import ttk
 import mysql.connector as mc
 import tkinter.messagebox as mb
+from datetime import datetime
+
 class Staff:
     def __init__(self ,centerFrame):
         self.centerFrame=centerFrame
@@ -137,35 +139,57 @@ class StaffWindow:
         mycursor = mydp.cursor()
         sql = 'insert into staff(FirstName,LastName,CIN,Email,Phone,Date,Job) values (%s,%s,%s,%s,%s,%s,%s)'
         if (self.FirstNameEntry.get() == '' or self.LastNameEntry.get() == '' or self.CINEntry.get() == '' or self.EmailEntry.get() == '' or self.PhoneEntry.get() == '' or self.DateEntry.get() == '' or self.JopEntry.get()==''):
-            mb.showerror('Error', 'all Data is Empty')
+            mb.showerror('Error', 'all Data is Empty' ,parent = self.master)
         else:
-
             st = self.EmailEntry.get().find("@gmail.com")
-            if (self.FirstNameEntry.get().isalpha() and self.LastNameEntry.get().isalpha() and self.CINEntry.get().isdigit() and (self.EmailEntry.get()[st] == '@' and st != -1) and self.PhoneEntry.get().isdigit() and not (self.DateEntry.get().isalpha())):
-                val = (self.FirstNameEntry.get(), self.LastNameEntry.get(), self.CINEntry.get(), self.EmailEntry.get(),self.PhoneEntry.get(), self.DateEntry.get(),self.JopEntry.get())
-                mycursor.execute(sql, val)
-                mydp.commit()
-                id1 = mycursor.lastrowid  # للحصول على اخر id اضيف للجدول
-
-                query = "SELECT * FROM staff ORDER BY id DESC LIMIT 1"
-                mycursor.execute(query)
-                row = mycursor.fetchone()
-
-                if row[6] == None:
-                    self.delete1(row[6], id1)
-                    mb.showerror("Error", "التاريخ الذي ادخلته خاطئ يا حبيبي رجاع دخل")
+            if self.FirstNameEntry.get().isalpha():
+                if self.LastNameEntry.get().isalpha():
+                    if self.CINEntry.get().isdigit():
+                        if (self.EmailEntry.get()[st]=='@' and st !=-1):
+                            if self.PhoneEntry.get().isdigit():
+                                if self.is_valid_date(self.DateEntry.get()):
+                                    try:
+                                        val = (
+                                        self.FirstNameEntry.get(), self.LastNameEntry.get(), self.CINEntry.get(),
+                                        self.EmailEntry.get(), self.PhoneEntry.get(), self.DateEntry.get(),
+                                        self.JopEntry.get())
+                                        mycursor.execute(sql, val)
+                                        mydp.commit()
+                                        id1 = mycursor.lastrowid  # للحصول على اخر id اضيف للجدول
+                                        query = "SELECT * FROM staff ORDER BY id DESC LIMIT 1"
+                                        mycursor.execute(query)
+                                        row = mycursor.fetchone()
+                                        if row[6] == None:
+                                            self.delete1(row[6], id1)
+                                            mb.showerror("Error", "التاريخ الذي ادخلته خاطئ يا حبيبي رجاع دخل",parent=self.master)
+                                        else:
+                                            self.table.insert('', 'end', values=(id1, self.FirstNameEntry.get(), self.LastNameEntry.get(),
+                                            self.CINEntry.get(),
+                                            self.EmailEntry.get(), self.PhoneEntry.get(), self.DateEntry.get(),
+                                            self.JopEntry.get()))
+                                            mb.showinfo("Successfully added", 'Data inserted Successfully', parent=self.master)
+                                            # حذف بيانات الEntry
+                                            self.read()
+                                            self.Reset()
+                                            # self.last_id = mycursor.lastrowid
+                                            # sss="SELECT Date FROM student WHERE id = %s" + str(self.last_id)
+                                            # sqll = mycursor.execute(sss)
+                                            # print(sqll)
+                                            mydp.close()
+                                    except:
+                                        mb.showerror('error', 'التاريخ الذي ادخلته غير موجود ياحبيبي', parent=self.master)
+                                else:
+                                    mb.showerror("Error","التاريخ عير صحيح", parent=self.master)
+                            else:
+                                mb.showerror('Error',"رقم الجوال غير صحيح", parent=self.master)
+                        else:
+                            mb.showerror('Error', "الإيميل غير صحيح", parent=self.master)
+                    else:
+                        mb.showerror('Error', "حقل الرقم الشخصي بياناته غير صحيحة", parent=self.master)
                 else:
-                    self.table.insert('', 'end', values=(id1, self.FirstNameEntry.get(), self.LastNameEntry.get(), self.CINEntry.get(),self.EmailEntry.get(), self.PhoneEntry.get(), self.DateEntry.get(),self.JopEntry.get()))
-                    mb.showinfo("Successfully added", 'Data inserted Successfully', parent=self.master)
-                    # حذف بيانات الEntry
-                    self.Reset()
-                    # self.last_id = mycursor.lastrowid
-                    # sss="SELECT Date FROM student WHERE id = %s" + str(self.last_id)
-                    # sqll = mycursor.execute(sss)
-                    # print(sqll)
-                    mydp.close()
+                    mb.showerror('Error', "الاسم الاخير  غير صحيح", parent=self.master)
             else:
-                mb.showerror('Error', 'يوجد قيمة او اكثر ليست من نوع البيانات المطلوبة')
+                mb.showerror('Error', "حقل الاسم الاول بياناته غير صحيحة", parent=self.master)
 
     def read(self):
         mydp = mc.connect(host='localhost',
@@ -180,8 +204,10 @@ class StaffWindow:
         for mr in myresult:
             self.table.insert('', 'end', iid=mr[0],values=mr)  # الحصول على قيمة iidالمفتاح من القاعدة # على علاقة focus مع
         # execute a select statement to get the date of the last inserted record
+        self.iid = None
 
     def show(self, ev):
+
         self.iid = self.table.focus()  # الحصول على id الصف المحدد عليه في الجدول
         alldata = self.table.item(self.iid)  # الحصول على العناصر من الصف ووضعها في قاموس
         val = alldata['values']  # قائمة عناصر
@@ -192,6 +218,7 @@ class StaffWindow:
         self.phone.set(val[5])
         self.date.set(val[6])
         self.jopEntry.set(val[7])
+
 
     def Reset(self):
         self.FirstNameEntry.delete(0, 'end')
@@ -208,12 +235,20 @@ class StaffWindow:
                           password='',
                           database="un")
         mycursor = mydp.cursor()
-        sql = ('delete from staff where id = ' + self.iid)
-        mycursor.execute(sql)
-        mydp.commit()
-        self.read()
-        self.Reset()
-        mb.showinfo("Deleted ", 'the Student Deleted', parent=self.master)
+        try:
+            sql = ('delete from staff where id = ' + self.iid)
+        except:
+            mb.showerror('Error', "لم يتم تحديد سطر")
+            return 0
+        try:
+            mycursor.execute(sql)
+            mydp.commit()
+            self.read()
+            self.Reset()
+            mb.showinfo("Deleted ", 'the Student Deleted', parent=self.master)
+        except:
+            mb.showerror('Error','لايمكن حذف السجل لارتباطه بجداول اخرى')
+
         # في حال التاريخ خاطئ
 
     def delete1(self, r, id):
@@ -235,26 +270,67 @@ class StaffWindow:
                           password='',
                           database="un")
         mycursor = mydp.cursor()
-        sql = ('update staff set FirstName=%s,LastName=%s,CIN=%s,Email=%s,Phone=%s,Date=%s,Job = %s where id = ' + self.iid)
-        val = (self.first.get(), self.last.get(), self.cin.get(), self.email.get(), self.phone.get(), self.date.get() , self.JopEntry.get())
-        mycursor.execute(sql, val)
-        mydp.commit()
-        self.read()
-        self.Reset()
-        mb.showinfo("Update ", 'the Student is Update', parent=self.master)
-
+        try:
+            sql = ('update staff set FirstName=%s,LastName=%s,CIN=%s,Email=%s,Phone=%s,Date=%s,Job = %s where id = ' + self.iid)
+        except:
+            mb.showerror('Error', 'لم يتم تحديد سطر')
+            return 0
+        if (self.FirstNameEntry.get() == '' or self.LastNameEntry.get() == '' or self.CINEntry.get() == '' or self.EmailEntry.get() == '' or self.PhoneEntry.get() == '' or self.DateEntry.get() == '' or self.JopEntry.get()==''):
+            mb.showerror('Error', 'all Data is Empty' ,parent = self.master)
+        else:
+            st = self.EmailEntry.get().find("@gmail.com")
+            if self.FirstNameEntry.get().isalpha():
+                if self.LastNameEntry.get().isalpha():
+                    if self.CINEntry.get().isdigit():
+                        if (self.EmailEntry.get()[st] == '@' and st != -1):
+                            if self.PhoneEntry.get().isdigit():
+                                if self.is_valid_date(self.DateEntry.get()):
+                                    val = (self.first.get(), self.last.get(), self.cin.get(), self.email.get(), self.phone.get(),self.date.get(), self.JopEntry.get())
+                                    mycursor.execute(sql, val)
+                                    mydp.commit()
+                                    self.read()
+                                    self.Reset()
+                                    mb.showinfo("Update ", 'the Staff is Update', parent=self.master)
+                                else:
+                                    mb.showerror('Error',"التاريخ عير صحيح", parent=self.master)
+                            else:
+                                mb.showerror('Error', "رقم الجوال غير صحيح", parent=self.master)
+                        else:
+                            mb.showerror('Error', "الإيميل غير صحيح", parent=self.master)
+                    else:
+                        mb.showerror('Error', "حقل الرقم الشخصي بياناته غير صحيحة", parent=self.master)
+                else:
+                    mb.showerror('Error', "الاسم الاخير  غير صحيح", parent=self.master)
+            else:
+                mb.showerror('Error', "حقل الاسم الاول بياناته غير صحيحة", parent=self.master)
     def search(self):
         mydp = mc.connect(host='localhost',
                           user='root',
                           password='',
                           database="un")
         mycursor = mydp.cursor()
-        sql = ('select * from staff where id = ' + self.searchStudent.get())
-        mycursor.execute(sql)
-        myresult = mycursor.fetchone()
-        self.table.delete( *self.table.get_children())  # كانت سبب في حدوث خطا اثناء استدعاء الدالة هي لحذف كل سجلات الجدول
-        self.table.insert('', 'end', iid=myresult[0], values=myresult)
-        mydp.commit()
-        mydp.close()
-
+        if (len(self.searchStudent.get()) != 0):
+            if self.searchStudent.get().isdigit():
+                try:
+                    sql = ('select * from staff where id = ' + self.searchStudent.get())
+                    mycursor.execute(sql)
+                    myresult = mycursor.fetchone()
+                    self.table.delete(
+                        *self.table.get_children())  # كانت سبب في حدوث خطا اثناء استدعاء الدالة هي لحذف كل سجلات الجدول
+                    self.table.insert('', 'end', iid=myresult[0], values=myresult)
+                    mydp.commit()
+                    mydp.close()
+                except:
+                    mb.showerror("Error","الرقم الذي ادخلته غير موجود")
+            else:
+                mb.showerror("Error","البيانات التي ادخلتها غير صحيحة")
+        else:
+            mb.showerror('Error',"لم يتم تحديد قيمة")
+    def is_valid_date(self,date_str):
+        try:
+            # تحويل النص إلى تاريخ
+            datetime_obj = datetime.strptime(date_str, '%Y-%m-%d')  # تنسيق التاريخ (YYYY-MM-DD)
+            return True  # إذا كان التحويل ناجحًا، يعني أن البيانات صحيحة
+        except ValueError:
+            return False  # في حالة حدوث خطأ أثناء التحويل، يعني ذلك أن البيانات غير صحيحة
 
