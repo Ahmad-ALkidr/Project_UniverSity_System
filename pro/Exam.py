@@ -9,11 +9,11 @@ from tkcalendar import Calendar
 
 
 class Exam:
-    def __init__(self,bottomFrame):
-        self.bottomFrame=bottomFrame
+    def __init__(self, bottom_frame):
+        self.bottomFrame = bottom_frame
         self.examFrame = Frame(self.bottomFrame, pady=10, padx=10)
-        self.examFrame.grid(row=1, column=1, sticky='senw', pady=5)
-        self.img4 = Image.open('image/exam.png')
+        self.examFrame.grid(row=1, column=1, sticky='senw', pady=5) #تعني أن العنصر يتمدد في كل الاتجاهات: شمالًا وجنوبًا
+        self.img4 = Image.open('image/4662967.png')
         self.img4.thumbnail((150, 150))
         self.new_img4 = ImageTk.PhotoImage(self.img4)
 
@@ -27,17 +27,18 @@ class Exam:
     def openexamwindo(self):
         ex = exam()
 
+
 class exam:
     def __init__(self):
         self.master = Toplevel()
-        self.master.title('Library Management System')
+        self.master.title('Exam Management System')
         self.master.geometry("1200x600+0+0")
         # -------------------------------------------------------#
         #  side  تسمح خاصية باخذ العنصر لاقصى اليسار للوسط
         self.frameleft = Frame(self.master, width=400)
         self.frameleft.pack(side=LEFT, fill=Y)
         # -------------------------------------------------------#
-        self.nameLable = Label(self.frameleft, text='GroupName :', font=('tahoma', 10, 'bold'))
+        self.nameLable = Label(self.frameleft, text='HallName :', font=('tahoma', 10, 'bold'))
         self.nameLable.place(x=10, y=20)
         self.phonLabel = Label(self.frameleft, text='NumClassRoom :', font=('tahoma', 10, 'bold'))
         self.phonLabel.place(x=10, y=80)
@@ -56,7 +57,7 @@ class exam:
         self.class1 = StringVar()
         self.professor1 = StringVar()
         self.time = StringVar()
-        self.id_Colleges1=StringVar()
+        self.id_Colleges1 = StringVar()
 
         self.nameGroup = Entry(self.frameleft, fg='#4F4F4F', font=('tahoma', 12, 'bold'), textvariable=self.name)
         self.nameGroup.place(x=130, y=20, width=250, height=30)
@@ -64,7 +65,8 @@ class exam:
         self.classRoom.place(x=130, y=80, width=250, height=30)
         self.professor = Entry(self.frameleft, fg='#4F4F4F', font=('tahoma', 12, 'bold'), textvariable=self.professor1)
         self.professor.place(x=130, y=140, width=250, height=30)
-        self.id_Colleges = Entry(self.frameleft, fg='#4F4F4F', font=('tahoma', 12, 'bold'), textvariable=self.id_Colleges1)
+        self.id_Colleges = Entry(self.frameleft, fg='#4F4F4F', font=('tahoma', 12, 'bold'),
+                                 textvariable=self.id_Colleges1)
         self.id_Colleges.place(x=130, y=200, width=250, height=30)
 
         # الحصول على تاريخ اليوم
@@ -72,13 +74,12 @@ class exam:
         s = str(t).split('-')
         ss = s[2].split(' ')
 
-        self.DateExam = Calendar(self.frameleft ,mindate=datetime.today())
+        self.DateExam = Calendar(self.frameleft, mindate=datetime.today())
         self.DateExam.place(x=130, y=250, width=250, height=200)
-        self.Time = ttk.Combobox(self.frameleft, values=['' ,'7:00','8:00', '9:00', '10:00', '11:00', '12:00', '1:00'],
-                                     font=('tahoma', 10, 'bold'), width=29, state='readonly',
-                                     textvariable=self.time)
+        self.Time = ttk.Combobox(self.frameleft, values=['', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00', '1:00'],
+                                 font=('tahoma', 10, 'bold'), width=29, state='readonly',
+                                 textvariable=self.time)
         self.Time.place(x=125, y=500)
-
 
         self.add = Button(self.frameleft, command=self.add, text="add", bg='#1b9ea4')
         self.add.place(x=30, y=600, width=60, height=60)
@@ -92,7 +93,7 @@ class exam:
         self.Rest.place(x=330, y=600, width=60, height=60)
 
         # ------------Start right top -----------------------#
-        self.frameright = Frame(self.master, width=800 ,bg='red')
+        self.frameright = Frame(self.master, width=800, bg='red')
         self.frameright.pack(side=LEFT, fill=Y)
         # ------------Start right top -----------------------#
         self.framerighttop = Frame(self.frameright, height=50, pady=5, padx=5)
@@ -108,30 +109,31 @@ class exam:
         self.framerighttop.grid_columnconfigure(1, weight=1)
 
         # -------------------------- Frame Top View --------------------------#
-        self.frameview = Frame(self.frameright, bg='blue',height=600)
+        self.frameview = Frame(self.frameright, bg='blue', height=600)
         self.frameview.pack(fill=BOTH)
         self.scrollbar = Scrollbar(self.frameview, orient=VERTICAL)
         self.table = ttk.Treeview(self.frameview,
-                                  columns=("ID", "GroupName", "ClassRoom", "Professor","DataExam","Time","id_Colleges"),
-                                  show='headings', yscrollcommand=self.scrollbar.set,height=600)
+                                  columns=(
+                                  "ID", "HallName", "ClassRoom", "Professor", "DataExam", "Time", "id_Colleges"),
+                                  show='headings', yscrollcommand=self.scrollbar.set, height=600)
         self.scrollbar.pack(side=RIGHT, fill=Y)
         self.table.pack(fill=BOTH)
 
         self.table.heading("ID", text="ID")
-        self.table.heading("GroupName", text="GroupName")
+        self.table.heading("HallName", text="HallName")
         self.table.heading("ClassRoom", text="ClassRoom")
         self.table.heading("Professor", text="Professor")
         self.table.heading("DataExam", text="DataExam")
         self.table.heading("Time", text="Time")
-        self.table.heading("id_Colleges" , text="id_Colleges")
+        self.table.heading("id_Colleges", text="id_Colleges")
 
         self.table.column("ID", anchor=W, width=10)  # بلظهار القيم في الجدول في الجانب الايسر وضعنا w
-        self.table.column("GroupName", anchor=W , width=130)
-        self.table.column("ClassRoom", anchor=W , width=130)
-        self.table.column("Professor", anchor=W , width=130)
+        self.table.column("HallName", anchor=W, width=130)
+        self.table.column("ClassRoom", anchor=W, width=130)
+        self.table.column("Professor", anchor=W, width=130)
         self.table.column("DataExam", anchor=W)
         self.table.column("Time", anchor=W)
-        self.table.column("id_Colleges",anchor=W , width=15)
+        self.table.column("id_Colleges", anchor=W, width=15)
         # self.read()
         self.table.bind('<ButtonRelease>', self.show)
 
@@ -142,20 +144,23 @@ class exam:
                           database="un")
         mycursor = mydp.cursor()
         sql = 'insert into exam(GroupName,ClassRoom,Professor,DataExam,Time,id_Colleges) values (%s,%s,%s,%s,%s,%s)'
-        if (len(self.nameGroup.get()) == 0 or len(self.classRoom.get()) == 0  or len(self.professor.get())==0 or len(self.DateExam.get_date())==0 or len(self.Time.get())==0 or len(self.id_Colleges.get())==0):
-            mb.showerror('Error', 'يوجد حقول فارغة', parent =self.master)
+        if (len(self.nameGroup.get()) == 0 or len(self.classRoom.get()) == 0 or len(self.professor.get()) == 0 or len(
+                self.DateExam.get_date()) == 0 or len(self.Time.get()) == 0 or len(self.id_Colleges.get()) == 0):
+            mb.showerror('Error', 'يوجد حقول فارغة', parent=self.master)
         else:
             if self.nameGroup.get().isalpha():
                 if self.classRoom.get().isdigit():
                     if self.professor.get().isalpha():
                         if self.id_Colleges.get().isdigit():
                             try:
-                                val = (self.nameGroup.get(), self.classRoom.get(), self.professor.get(), self.DateExam.get_date(), self.Time.get(), self.id_Colleges.get())
+                                val = (self.nameGroup.get(), self.classRoom.get(), self.professor.get(),
+                                       self.DateExam.get_date(), self.Time.get(), self.id_Colleges.get())
                                 mycursor.execute(sql, val)
                                 mydp.commit()
                                 id1 = mycursor.lastrowid  # للحصول على اخر id اضيف للجدول
-                                self.table.insert('', 'end', values=(id1, self.nameGroup.get(), self.classRoom.get(), self.professor.get(),
-                                    self.DateExam.get_date(), self.Time.get(), self.id_Colleges.get()))
+                                self.table.insert('', 'end', values=(
+                                id1, self.nameGroup.get(), self.classRoom.get(), self.professor.get(),
+                                self.DateExam.get_date(), self.Time.get(), self.id_Colleges.get()))
                                 mb.showinfo("Successfully added", 'Data inserted Successfully', parent=self.master)
                                 self.read()
                                 self.Reset()
@@ -198,6 +203,7 @@ class exam:
 
         # execute a select statement to get the date of the last inserted record
         self.iid = None
+
     def show(self, ev):
         self.iid = self.table.focus()  # الحصول على id الصف المحدد عليه في الجدول
         alldata = self.table.item(self.iid)  # الحصول على العناصر من الصف ووضعها في قاموس
@@ -213,12 +219,12 @@ class exam:
         self.nameGroup.delete(0, 'end')
         self.classRoom.delete(0, 'end')
         self.professor.delete(0, 'end')
-        self.id_Colleges.delete(0,'end')
+        self.id_Colleges.delete(0, 'end')
         self.DateExam.selection_clear()
         self.Time.set('')
 
     def delete(self):
-        mydp = mc.connect(host='localhost',user='root',password='',database="un")
+        mydp = mc.connect(host='localhost', user='root', password='', database="un")
         mycursor = mydp.cursor()
         try:
             sql = ('delete from exam where id = ' + self.iid)
@@ -234,7 +240,6 @@ class exam:
         except:
             mb.showerror('Error', 'لايمكن حذف السجل لارتباطه بجداول اخرى')
 
-
     def update(self):
         mydp = mc.connect(host='localhost',
                           user='root',
@@ -242,11 +247,13 @@ class exam:
                           database="un")
         mycursor = mydp.cursor()
         try:
-            sql = ('update exam set GroupName=%s,ClassRoom=%s,Professor=%s,DataExam=%s,Time=%s,id_colleges=%s where id = ' + self.iid)
+            sql = (
+                        'update exam set GroupName=%s,ClassRoom=%s,Professor=%s,DataExam=%s,Time=%s,id_colleges=%s where id = ' + self.iid)
         except:
             mb.showerror('Error', 'لم يتم تجديد سطر')
             return 0
-        if (len(self.nameGroup.get()) == 0 or len(self.classRoom.get()) == 0 or len(self.professor.get()) == 0 or len(self.DateExam.get_date()) == 0 or len(self.Time.get()) == 0 or len(self.id_Colleges.get()) == 0):
+        if (len(self.nameGroup.get()) == 0 or len(self.classRoom.get()) == 0 or len(self.professor.get()) == 0 or len(
+                self.DateExam.get_date()) == 0 or len(self.Time.get()) == 0 or len(self.id_Colleges.get()) == 0):
             mb.showerror('Error', 'يوجد حقول فارغة', parent=self.master)
         else:
             try:
@@ -274,6 +281,7 @@ class exam:
                     mb.showerror('Error', "حقل اسم الكلية بياناته غير صحيحة")
             except:
                 mb.showerror('Error', 'رقم الكلية غير موجود في جدول الكلية')
+
     def search(self):
         mydp = mc.connect(host='localhost',
                           user='root',
@@ -286,13 +294,14 @@ class exam:
                     sql = ('select * from exam where id = ' + self.searchStudent.get())
                     mycursor.execute(sql)
                     myresult = mycursor.fetchone()
-                    self.table.delete(*self.table.get_children())  # كانت سبب في حدوث خطا اثناء استدعاء الدالة هي لحذف كل سجلات الجدول
+                    self.table.delete(
+                        *self.table.get_children())  # كانت سبب في حدوث خطا اثناء استدعاء الدالة هي لحذف كل سجلات الجدول
                     self.table.insert('', 'end', iid=myresult[0], values=myresult)
                     mydp.commit()
                     mydp.close()
                 except:
-                    mb.showerror("Error","الرقم الذي ادخلته غير موجود")
+                    mb.showerror("Error", "الرقم الذي ادخلته غير موجود")
             else:
-                mb.showerror("Error","البيانات التي ادخلتها غير صحيحة")
+                mb.showerror("Error", "البيانات التي ادخلتها غير صحيحة")
         else:
-            mb.showerror('Error',"لم يتم تحديد قيمة")
+            mb.showerror('Error', "لم يتم تحديد قيمة")

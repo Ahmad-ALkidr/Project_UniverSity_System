@@ -3,6 +3,7 @@ import Student as s
 import Staff as st
 import Subject as l
 import Exam as e
+import Maneger as mn
 from PIL import Image,ImageTk
 import mysql.connector as mc
 import tkinter.messagebox as mb
@@ -51,10 +52,11 @@ class University():
         # ---------- Frame exam Here -------------------------------#
         ex = e.Exam(self.bottomFrame)
         # #---------- Frame Bottom End Here -------------------------##
-
+        mn1 = mn.Maneger(self.bottomFrame)
 
         self.bottomFrame.grid_columnconfigure(0, weight=1)
         self.bottomFrame.grid_columnconfigure(1, weight=1)
+        self.bottomFrame.grid_columnconfigure(2, weight=1)
     def logout(self):
         self.master.destroy()
 
@@ -99,10 +101,11 @@ class Login:
         mycursor.execute(sql)
         res = mycursor.fetchone()
         if(res == None):
-            mb.showerror("Error" "Invalid Username and Password ! Please Try again")
+            mb.showerror("Error", "Invalid Username and Password ! Please Try again")
         else:
             window = Toplevel()
             uni = University(window)
+            self.master.withdraw()
             mydp.close()
 
 
@@ -114,6 +117,5 @@ class Login:
 
 if (__name__ == '__main__'):
     window = Tk()
-    # std = Login(window)
-    std=University(window)
+    std = Login(window)
     mainloop()
