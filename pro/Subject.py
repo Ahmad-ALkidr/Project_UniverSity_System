@@ -10,7 +10,7 @@ class Library:
         self.bottomFrame=bottomFrame
         self.libraryFrame = Frame(self.bottomFrame, pady=10, padx=10)
         self.libraryFrame.grid(row=1, column=0, sticky='senw', pady=5)
-        self.img3 = Image.open('image/purpose.png')
+        self.img3 = Image.open('image/png-transparent-subject-international-english-computer-icons-symbol-english-miscellaneous-blue-english-removebg-preview.png')
         self.img3.thumbnail((150, 150))
         self.new_img3 = ImageTk.PhotoImage(self.img3)
 

@@ -10,7 +10,7 @@ class Staff:
         self.centerFrame=centerFrame
         self.staffFrame = Frame(self.centerFrame, pady=10, padx=10)
         self.staffFrame.grid(row=0, column=2,sticky='senw',pady=5)
-        self.img2 = Image.open('image/2-removebg-preview.png')
+        self.img2 = Image.open('image/8439492.png')
         self.img2.thumbnail((200, 200))
         self.new_img2 = ImageTk.PhotoImage(self.img2)
 
@@ -149,10 +149,7 @@ class StaffWindow:
                             if self.PhoneEntry.get().isdigit():
                                 if self.is_valid_date(self.DateEntry.get()):
                                     try:
-                                        val = (
-                                        self.FirstNameEntry.get(), self.LastNameEntry.get(), self.CINEntry.get(),
-                                        self.EmailEntry.get(), self.PhoneEntry.get(), self.DateEntry.get(),
-                                        self.JopEntry.get())
+                                        val = (self.FirstNameEntry.get(), self.LastNameEntry.get(), self.CINEntry.get(),self.EmailEntry.get(), self.PhoneEntry.get(), self.DateEntry.get(),self.JopEntry.get())
                                         mycursor.execute(sql, val)
                                         mydp.commit()
                                         id1 = mycursor.lastrowid  # للحصول على اخر id اضيف للجدول
