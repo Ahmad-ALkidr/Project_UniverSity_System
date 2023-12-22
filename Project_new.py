@@ -116,23 +116,23 @@ class StudentWindow:
                                 textvariable=self.id_Teacher1)
         self.id_Teacher.place(x=100, y=300, width=150, height=30)
 
-        self.img0 = Image.open('image/delete.png')
+        self.img0 = Image.open('pro/image/delete.png')
         self.img0.thumbnail((30, 30))
         self.new_im0 = ImageTk.PhotoImage(self.img0)
 
-        self.img1 = Image.open('image/add-file.png')
+        self.img1 = Image.open('pro/image/add-file.png')
         self.img1.thumbnail((30, 30))
         self.new_im1 = ImageTk.PhotoImage(self.img1)
 
-        self.img2 = Image.open('image/rotation.png')
+        self.img2 = Image.open('pro/image/rotation.png')
         self.img2.thumbnail((30, 30))
         self.new_im2 = ImageTk.PhotoImage(self.img2)
 
-        self.img3 = Image.open('image/cleaning.png')
+        self.img3 = Image.open('pro/image/cleaning.png')
         self.img3.thumbnail((30, 30))
         self.new_im3 = ImageTk.PhotoImage(self.img3)
 
-        self.img4 = Image.open('image/visual.png')
+        self.img4 = Image.open('pro/image/visual.png')
         self.img4.thumbnail((30, 30))
         self.new_im4 = ImageTk.PhotoImage(self.img4)
 
@@ -1272,23 +1272,23 @@ class Subject:
         self.table.column("id_teacher", anchor=W, width=30)
         self.table.column("id_collage", anchor=W, width=30)
         # self.read()
-        self.img0 = Image.open('image/delete.png')
+        self.img0 = Image.open('pro/image/delete.png')
         self.img0.thumbnail((30, 30))
         self.new_im0 = ImageTk.PhotoImage(self.img0)
 
-        self.img1 = Image.open('image/add-file.png')
+        self.img1 = Image.open('pro/image/add-file.png')
         self.img1.thumbnail((30, 30))
         self.new_im1 = ImageTk.PhotoImage(self.img1)
 
-        self.img2 = Image.open('image/rotation.png')
+        self.img2 = Image.open('pro/image/rotation.png')
         self.img2.thumbnail((30, 30))
         self.new_im2 = ImageTk.PhotoImage(self.img2)
 
-        self.img3 = Image.open('image/cleaning.png')
+        self.img3 = Image.open('pro/image/cleaning.png')
         self.img3.thumbnail((30, 30))
         self.new_im3 = ImageTk.PhotoImage(self.img3)
 
-        self.img4 = Image.open('image/visual.png')
+        self.img4 = Image.open('pro/image/visual.png')
         self.img4.thumbnail((30, 30))
         self.new_im4 = ImageTk.PhotoImage(self.img4)
 
@@ -1962,7 +1962,7 @@ class maneger:
         self.master = window
         self.height = self.master.winfo_screenheight()
         self.width = self.master.winfo_screenwidth()
-        self.img = Image.open("image/clipart2409514.png")
+        self.img = Image.open("pro/image/clipart2409514.png")
         self.img.thumbnail((200, 200))
         self.new_img = ImageTk.PhotoImage(self.img)
         self.imglabel = Label(self.master, image=self.new_img)
@@ -2011,7 +2011,7 @@ class Add_User:
         self.width = self.master.winfo_screenwidth()
         self.master.geometry('600x600+350+100')
         self.master.resizable(width=False, height=False)
-        self.img = Image.open("image/clipart2409514.png")
+        self.img = Image.open("pro/image/clipart2409514.png")
         self.img.thumbnail((200, 200))
         self.new_img = ImageTk.PhotoImage(self.img)
         self.imglabel = Label(self.master, image=self.new_img)
@@ -2123,7 +2123,7 @@ class Login:
         self.width = self.master.winfo_screenwidth()
         self.master.geometry("600x600+400+150")
         self.master.resizable(width=False , height=False)
-        self.img = Image.open("image/clipart2409514.png")
+        self.img = Image.open("pro/image/clipart2409514.png")
         self.img.thumbnail((200,200))
         self.new_img=ImageTk.PhotoImage(self.img)
         self.imglabel = Label(self.master , image=self.new_img)
