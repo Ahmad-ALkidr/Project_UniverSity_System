@@ -5,7 +5,7 @@ import mysql.connector as mc
 import tkinter.messagebox as mb
 from datetime import datetime
 from tkcalendar import Calendar
-
+import webbrowser as web
 
 class University():
     def __init__(self, window):
@@ -178,7 +178,7 @@ class StudentWindow:
         self.scrollbar = Scrollbar(self.frameview, orient=VERTICAL)
         self.table = ttk.Treeview(self.frameview, columns=(
         "ID", "FirstName", "LastName", "CIN", "Email", "Phone", "Date", "id_colleges", "id_Teacher"), show='headings',
-                                  yscrollcommand=self.scrollbar.set)
+                                  yscrollcommand=self.scrollbar.set,height=400)
         self.scrollbar.pack(side=RIGHT, fill=Y)
         self.table.pack(fill=BOTH)
 
@@ -1188,18 +1188,18 @@ class Subject:
         self.nameLable = Label(self.frameleft, text='NameSubject :', font=('tahoma', 10, 'bold'))
         self.nameLable.place(x=10, y=20)
         self.UnitLabel = Label(self.frameleft, text='UnitSubject :', font=('tahoma', 10, 'bold'))
-        self.UnitLabel.place(x=10, y=80)
+        self.UnitLabel.place(x=10, y=70)
 
         self.id_teacherL = Label(self.frameleft, text='id_teacher :', font=('tahoma', 10, 'bold'))
-        self.id_teacherL.place(x=10, y=140)
+        self.id_teacherL.place(x=10, y=120)
 
         self.id_collegeL = Label(self.frameleft, text='id_college :', font=('tahoma', 10, 'bold'))
-        self.id_collegeL.place(x=10, y=200)
+        self.id_collegeL.place(x=10, y=170)
 
         self.StartDateLabel = Label(self.frameleft, text='StartDate :', font=('tahoma', 10, 'bold'))
-        self.StartDateLabel.place(x=10, y=250)
+        self.StartDateLabel.place(x=10, y=220)
         self.EndDateLabel = Label(self.frameleft, text='EndDate :', font=('tahoma', 10, 'bold'))
-        self.EndDateLabel.place(x=10, y=470)
+        self.EndDateLabel.place(x=10, y=410)
 
         # الحصول على \
         # الدالة StringVar() في بايثون هي دالة لإنشاء متغير نصي. يمكن استخدام هذا المتغير لربطه بعناصر واجهة المستخدم الرسومية، مثل الحقول النصية، لإنشاء ربط ديناميكي بين عنصر واجهة المستخدم وبيانات التطبيق.
@@ -1211,13 +1211,13 @@ class Subject:
         self.nameSubject = Entry(self.frameleft, fg='#4F4F4F', font=('tahoma', 12, 'bold'), textvariable=self.name)
         self.nameSubject.place(x=130, y=20, width=250, height=30)
         self.unitSubject = Entry(self.frameleft, fg='#4F4F4F', font=('tahoma', 12, 'bold'), textvariable=self.unit)
-        self.unitSubject.place(x=130, y=80, width=250, height=30)
+        self.unitSubject.place(x=130, y=70, width=250, height=30)
         self.id_teacherE = Entry(self.frameleft, fg='#4F4F4F', font=('tahoma', 12, 'bold'),
                                  textvariable=self.id_teacher1)
-        self.id_teacherE.place(x=130, y=140, width=250, height=30)
+        self.id_teacherE.place(x=130, y=120, width=250, height=30)
         self.id_college = Entry(self.frameleft, fg='#4F4F4F', font=('tahoma', 12, 'bold'),
                                 textvariable=self.id_college1)
-        self.id_college.place(x=130, y=200, width=250, height=30)
+        self.id_college.place(x=130, y=170, width=250, height=30)
 
         # الحصول على تاريخ اليوم
         # t = datetime.today()
@@ -1225,9 +1225,9 @@ class Subject:
         # ss = s[2].split(' ')
 
         self.StartDate = Calendar(self.frameleft, mindate=datetime.today())
-        self.StartDate.place(x=130, y=250, width=250, height=200)
+        self.StartDate.place(x=130, y=220, width=250, height=180)
         self.EndDate = Calendar(self.frameleft, selectmode='day', mindate=datetime.today())
-        self.EndDate.place(x=130, y=470, width=250, height=200)
+        self.EndDate.place(x=130, y=410, width=250, height=180)
 
         # ------------Start right top -----------------------#
         self.frameright = Frame(self.master, width=800)
@@ -1748,7 +1748,7 @@ class College:
         self.scrollbar = Scrollbar(self.frameview, orient=VERTICAL)
         self.table = ttk.Treeview(self.frameview,
                                   columns=("ID", "NameCollege", "NumCourse", "NumTeacher"),
-                                  show='headings', yscrollcommand=self.scrollbar.set)
+                                  show='headings', yscrollcommand=self.scrollbar.set,height=400)
         self.scrollbar.pack(side=RIGHT, fill=Y)
         self.table.pack(fill=BOTH)
 
@@ -2070,8 +2070,7 @@ class Add_User:
         if (len(self.EntryUser1.get()) == 0 or len(self.EntryUser1.get()) == 0 or len(self.NameAdmin.get()) == 0):
             mb.showerror('Error', 'يوجد حقول فارغة')
         else:
-            sql1 = (
-                        "select id from loginadmi where Username = '" + self.EntryUser1.get() + "' and Password = '" + self.Entrypass1.get() + "' and NameAdmin = '" + self.NameAdmin.get() + "' ")
+            sql1 = ("select id from loginadmi where Username = '" + self.EntryUser1.get() + "' and Password = '" + self.Entrypass1.get() + "' and NameAdmin = '" + self.NameAdmin.get() + "' ")
             mycursor.execute(sql1)
             qq = mycursor.fetchone()
             if qq == None:
@@ -2100,8 +2099,7 @@ class Add_User:
             mycursor.execute(a)
             mb1 = mycursor.fetchone()
             if mb1 != None:
-                sql = (
-                            "delete from loginadmi  where Username = '" + self.EntryUser1.get() + "' and Password = '" + self.Entrypass1.get() + "' and NameAdmin = '" + self.NameAdmin.get() + "'")
+                sql = ("delete from loginadmi  where Username = '" + self.EntryUser1.get() + "' and Password = '" + self.Entrypass1.get() + "' and NameAdmin = '" + self.NameAdmin.get() + "'")
                 mycursor.execute(sql)
                 mydp.commit()
                 mb.showinfo('Message', "نم حذف الحساب", parent=self.master)
@@ -2117,8 +2115,82 @@ class Add_User:
         self.Entrypass1.delete(0, 'end')
         self.NameAdmin.delete(0, 'end')
 
+class Login:
+    def __init__(self,window):
+        self.master = window
+        self.master.title("Login System ")
+        self.height = self.master.winfo_screenheight()
+        self.width = self.master.winfo_screenwidth()
+        self.master.geometry("600x600+400+150")
+        self.master.resizable(width=False , height=False)
+        self.img = Image.open("image/clipart2409514.png")
+        self.img.thumbnail((200,200))
+        self.new_img=ImageTk.PhotoImage(self.img)
+        self.imglabel = Label(self.master , image=self.new_img)
+        self.imglabel.pack()
+
+        self.frameEnter = Frame(self.master, height=200 , width= 500 )
+        self.frameEnter.pack()
+
+        self.EntryUser = Entry(self.frameEnter , width=25, font=('Tahoma',12))
+        self.EntryUser.grid(row=0 , column=1,pady=20)
+        self.Entrypass = Entry(self.frameEnter , width=25, font=('Tahoma',12) , show='*')
+        self.Entrypass.grid(row=1 , column=1 , pady=20 )
+
+        self.UserLabel = Label(self.frameEnter , text="UserName :" , font=('Tahoma',12,'bold'))
+        self.UserLabel.grid(row = 0 , column =0 )
+        self.passLabel = Label(self.frameEnter, text="Password :", font=('Tahoma',12,'bold'))
+        self.passLabel.grid(row=1 , column=0)
+
+        self.ch1 = IntVar()
+
+        self.ch = Checkbutton(self.master, text='Forget Password !', font=('Courier', 15, 'bold'), bg='whitesmoke',variable=self.ch1)
+        self.ch.place(x=140 , y=330)
+
+        self.Enter = Button(self.frameEnter,command=self.login1 , width=25 , text="Login", pady=10 ,bg='#1b9ea4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='mouse')
+        self.Enter.grid(row=3 , column=0, sticky='snew',pady= 60 , padx=7)
+        self.mess = Button(self.frameEnter, command=self.search, width=25, text="Emergency", pady=10, bg='#1b9ea4',activeforeground='white', activebackground='#750E21', font=('tahoma', 10, 'bold'), cursor='mouse')
+        self.mess.grid(row=3, column=1, sticky='snew', pady=60, padx=7)
+
+        self.lab = Label(self.master , text='Log in to the system 2024', font=('Courier',11 ,'bold'),bg='whitesmoke')
+        self.lab.place(x=180 , y=560)
+
+
+        self.Enter.bind("<Enter>", self.on_enter)
+        self.Enter.bind("<Leave>", self.on_leve)
+
+
+    def login1(self):
+        mydp = mc.connect(host='localhost',
+                          user='root',
+                          password='',
+                          database="un")
+        mycursor = mydp.cursor()
+        sql = "select * from loginadmi where Username = '" + self.EntryUser.get() + "' and Password = '" + self.Entrypass.get() + "' "
+        mycursor.execute(sql)
+        res = mycursor.fetchone()
+        if(res == None):
+            mb.showerror("Error", "Invalid Username and Password ! Please Try again")
+        else:
+            window = Toplevel()
+            uni = University(window)
+            self.master.withdraw()
+            mydp.close()
+    def on_enter(self , ev):
+        self.Enter['background']='#213363'
+    def on_leve(self , ev):
+        self.Enter['background']='#1b9ea4'
+
+    def search(self):
+        if self.ch1.get() == 1 :
+            e = 'https://api.whatsapp.com/send/?phone=%2B963991853387&text&type=phone_number&app_absent=0'
+            web.open(e)
+        else:
+            mb.showerror('Error', "لم يتم تفعيل خيار نسيت كلمة المرور")
+
+
 
 if (__name__ == '__main__'):
     window = Tk()
-    std = University(window)
+    std = Login(window)
     mainloop()
