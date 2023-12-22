@@ -77,15 +77,36 @@ class StudentWindow:
         self.id_Teacher = Entry(self.frameleft, fg='#4F4F4F', font=('tahoma', 12, 'bold'), textvariable=self.id_Teacher1)
         self.id_Teacher.place(x=100, y=300, width=150, height=30)
 
-        self.add = Button(self.frameleft,command=self.add, text="add",bg='#1b9ea4')
+        self.img0 = Image.open('image/delete.png')
+        self.img0.thumbnail((30, 30))
+        self.new_im0 = ImageTk.PhotoImage(self.img0)
+
+        self.img1 = Image.open('image/add-file.png')
+        self.img1.thumbnail((30, 30))
+        self.new_im1 = ImageTk.PhotoImage(self.img1)
+
+        self.img2 = Image.open('image/rotation.png')
+        self.img2.thumbnail((30, 30))
+        self.new_im2 = ImageTk.PhotoImage(self.img2)
+
+        self.img3 = Image.open('image/cleaning.png')
+        self.img3.thumbnail((30, 30))
+        self.new_im3 = ImageTk.PhotoImage(self.img3)
+
+        self.img4 = Image.open('image/visual.png')
+        self.img4.thumbnail((30, 30))
+        self.new_im4 = ImageTk.PhotoImage(self.img4)
+
+
+        self.add = Button(self.frameleft,command=self.add, image=self.new_im1,bg='#1b9ea4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
         self.add.place(x=30,y=350,width=60,height=60)
-        self.Update = Button(self.frameleft,command=self.update ,text="Update",bg='#1b9ea4')
+        self.Update = Button(self.frameleft,command=self.update ,image=self.new_im2,bg='#1b9ea4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
         self.Update.place(x=105, y=350,width=60,height=60)
-        self.Delete = Button(self.frameleft,command=self.delete, text="Delete",bg='#1b9ea4')
+        self.Delete = Button(self.frameleft,command=self.delete,image=self.new_im0,bg='#1b9ea4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='mouse')
         self.Delete.place(x=180, y=350,width=60,height=60)
-        self.Show = Button(self.frameleft, command=self.read, text="Show", bg='#1b9ea4')
+        self.Show = Button(self.frameleft, command=self.read, image=self.new_im4, bg='#1b9ea4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
         self.Show.place(x=255, y=350, width=60, height=60)
-        self.Rest = Button(self.frameleft, command=self.Reset, text="Rest", bg='#1b9ea4')
+        self.Rest = Button(self.frameleft, command=self.Reset, image=self.new_im3, bg='#1b9ea4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
         self.Rest.place(x=330, y=350, width=60, height=60)
 
         # ------------Start right top -----------------------#
@@ -133,6 +154,46 @@ class StudentWindow:
         self.table.column("id_colleges", anchor=W,width=40)
         #self.read()
         self.table.bind('<ButtonRelease>',self.show)
+
+        self.add.bind("<Enter>", self.on_enter)
+        self.add.bind("<Leave>", self.on_leve)
+
+        self.Update.bind("<Enter>", self.on_enter1)
+        self.Update.bind("<Leave>", self.on_leve1)
+
+        self.Delete.bind("<Enter>", self.on_enter2)
+        self.Delete.bind("<Leave>", self.on_leve2)
+
+        self.Show.bind("<Enter>", self.on_enter3)
+        self.Show.bind("<Leave>", self.on_leve3)
+
+        self.Rest.bind("<Enter>", self.on_enter4)
+        self.Rest.bind("<Leave>", self.on_leve4)
+
+    def on_enter(self , ev):
+        self.add['background'] = '#213363'
+    def on_leve(self , ev):
+        self.add['background'] = '#1b9ea4'
+
+    def on_enter1(self , ev):
+        self.Update['background'] = '#213363'
+    def on_leve1(self , ev):
+        self.Update['background'] = '#1b9ea4'
+
+    def on_enter2(self , ev):
+        self.Delete['background'] = '#213363'
+    def on_leve2(self , ev):
+        self.Delete['background'] = '#1b9ea4'
+
+    def on_enter3(self , ev):
+        self.Show['background'] = '#213363'
+    def on_leve3(self , ev):
+        self.Show['background'] = '#1b9ea4'
+
+    def on_enter4(self , ev):
+        self.Rest['background'] = '#213363'
+    def on_leve4(self , ev):
+        self.Rest['background'] = '#1b9ea4'
 
 
     def add(self):

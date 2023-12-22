@@ -7,6 +7,7 @@ import Maneger as mn
 from PIL import Image,ImageTk
 import mysql.connector as mc
 import tkinter.messagebox as mb
+import webbrowser as web
 
 
 import Colleges as i
@@ -69,6 +70,7 @@ class Login:
         self.height = self.master.winfo_screenheight()
         self.width = self.master.winfo_screenwidth()
         self.master.geometry("600x600+400+150")
+        self.master.resizable(width=False , height=False)
         self.img = Image.open("image/clipart2409514.png")
         self.img.thumbnail((200,200))
         self.new_img=ImageTk.PhotoImage(self.img)
@@ -88,8 +90,23 @@ class Login:
         self.passLabel = Label(self.frameEnter, text="Password :", font=('Tahoma',12,'bold'))
         self.passLabel.grid(row=1 , column=0)
 
-        self.Enter = Button(self.frameEnter,command=self.login1 , width=25 , text="Logi" , pady=10 ,bg='#1b9ea4')
-        self.Enter.grid(row=2 , column=0 ,columnspan=2 ,sticky='snew',pady= 7 , padx=7)
+        self.ch1 = IntVar()
+
+        self.ch = Checkbutton(self.master, text='Forget Password !', font=('Courier', 15, 'bold'), bg='whitesmoke',variable=self.ch1)
+        self.ch.place(x=140 , y=330)
+
+        self.Enter = Button(self.frameEnter,command=self.login1 , width=25 , text="Login", pady=10 ,bg='#1b9ea4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='mouse')
+        self.Enter.grid(row=3 , column=0, sticky='snew',pady= 60 , padx=7)
+        self.mess = Button(self.frameEnter, command=self.search, width=25, text="Emergency", pady=10, bg='#1b9ea4',activeforeground='white', activebackground='#750E21', font=('tahoma', 10, 'bold'), cursor='mouse')
+        self.mess.grid(row=3, column=1, sticky='snew', pady=60, padx=7)
+
+        self.lab = Label(self.master , text='Log in to the system 2024', font=('Courier',11 ,'bold'),bg='whitesmoke')
+        self.lab.place(x=180 , y=560)
+
+
+        self.Enter.bind("<Enter>", self.on_enter)
+        self.Enter.bind("<Leave>", self.on_leve)
+
 
     def login1(self):
         mydp = mc.connect(host='localhost',
@@ -107,6 +124,17 @@ class Login:
             uni = University(window)
             self.master.withdraw()
             mydp.close()
+    def on_enter(self , ev):
+        self.Enter['background']='#213363'
+    def on_leve(self , ev):
+        self.Enter['background']='#1b9ea4'
+
+    def search(self):
+        if self.ch1.get() == 1 :
+            e = 'https://api.whatsapp.com/send/?phone=%2B963991853387&text&type=phone_number&app_absent=0'
+            web.open(e)
+        else:
+            mb.showerror('Error', "لم يتم تفعيل خيار نسيت كلمة المرور")
 
 
 

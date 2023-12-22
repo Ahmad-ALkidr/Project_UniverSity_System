@@ -103,10 +103,27 @@ class Add_User:
         self.NameLabel.grid(row=2, column=0)
 
 
-        self.Enter = Button(self.frameEnter, command=self.Log, width=25, text="Add user", pady=10, bg='#1b9ea4')
+        self.Enter = Button(self.frameEnter, command=self.Log, width=25, text="Add user", pady=10, bg='#1b9ea4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'))
         self.Enter.grid(row=3, column=0, sticky='snew', pady=7, padx=7)
-        self.Enter = Button(self.frameEnter, command=self.delete_user, width=25, text="delete user", pady=10, bg='#1b9ea4')
-        self.Enter.grid(row=3, column=1, sticky='snew', pady=7, padx=7)
+        self.Enter1 = Button(self.frameEnter, command=self.delete_user, width=25, text="delete user", pady=10, bg='#1b9ea4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'))
+        self.Enter1.grid(row=3, column=1, sticky='snew', pady=7, padx=7)
+
+        self.Enter.bind("<Enter>", self.on_enter)
+        self.Enter.bind("<Leave>", self.on_leve)
+
+        self.Enter1.bind("<Enter>", self.on_enter1)
+        self.Enter1.bind("<Leave>", self.on_leve1)
+
+    def on_enter(self , ev):
+        self.Enter['background'] = '#213363'
+    def on_leve(self , ev):
+        self.Enter['background'] = '#1b9ea4'
+
+    def on_enter1(self , ev):
+        self.Enter1['background'] = '#213363'
+    def on_leve1(self , ev):
+        self.Enter1['background'] = '#1b9ea4'
+
     def Log(self):
         mydp = mc.connect(host='localhost',
                           user='root',
