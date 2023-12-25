@@ -1,4 +1,7 @@
 from tkinter import *
+
+#import keyboard
+
 import Student as s
 import Staff as st
 import Subject as l
@@ -71,19 +74,21 @@ class Login:
         self.width = self.master.winfo_screenwidth()
         self.master.geometry("600x600+400+150")
         self.master.resizable(width=False , height=False)
+        self.laF = LabelFrame(self.master,width=550,height=500,text='(❁´◡`❁)-Login System-(❁´◡`❁)',font=('Tahoma',12,'bold'))
+        self.laF.pack()
         self.img = Image.open("image/clipart2409514.png")
         self.img.thumbnail((200,200))
         self.new_img=ImageTk.PhotoImage(self.img)
-        self.imglabel = Label(self.master , image=self.new_img)
+        self.imglabel = Label(self.laF , image=self.new_img)
         self.imglabel.pack()
 
-        self.frameEnter = Frame(self.master, height=200 , width= 500 )
+        self.frameEnter = Frame(self.laF, height=200 , width= 500 )
         self.frameEnter.pack()
 
-        self.EntryUser = Entry(self.frameEnter , width=25, font=('Tahoma',12))
-        self.EntryUser.grid(row=0 , column=1,pady=20)
-        self.Entrypass = Entry(self.frameEnter , width=25, font=('Tahoma',12) , show='*')
-        self.Entrypass.grid(row=1 , column=1 , pady=20 )
+        self.EntryUser = Entry(self.frameEnter , width=23, font=('Tahoma',12))
+        self.EntryUser.grid(row=0 , column=1,pady=10)
+        self.Entrypass = Entry(self.frameEnter , width=23, font=('Tahoma',12) , show='*')
+        self.Entrypass.grid(row=1 , column=1 , pady=15 )
 
         self.UserLabel = Label(self.frameEnter , text="UserName :" , font=('Tahoma',12,'bold'))
         self.UserLabel.grid(row = 0 , column =0 )
@@ -93,20 +98,20 @@ class Login:
         self.ch1 = IntVar()
 
         self.ch = Checkbutton(self.master, text='Forget Password !', font=('Courier', 15, 'bold'), bg='whitesmoke',variable=self.ch1)
-        self.ch.place(x=140 , y=330)
+        self.ch.place(x=140 , y=340)
 
         self.Enter = Button(self.frameEnter,command=self.login1 , width=25 , text="Login", pady=10 ,bg='#1b9ea4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='mouse')
-        self.Enter.grid(row=3 , column=0, sticky='snew',pady= 60 , padx=7)
+        self.Enter.grid(row=3 , column=0, sticky='snew',pady=100 , padx=7)
         self.mess = Button(self.frameEnter, command=self.search, width=25, text="Emergency", pady=10, bg='#1b9ea4',activeforeground='white', activebackground='#750E21', font=('tahoma', 10, 'bold'), cursor='mouse')
-        self.mess.grid(row=3, column=1, sticky='snew', pady=60, padx=7)
+        self.mess.grid(row=3, column=1, sticky='snew', pady=100, padx=7)
 
         self.lab = Label(self.master , text='Log in to the system 2024', font=('Courier',11 ,'bold'),bg='whitesmoke')
-        self.lab.place(x=180 , y=560)
+        self.lab.place(x=180 , y=555)
 
 
         self.Enter.bind("<Enter>", self.on_enter)
         self.Enter.bind("<Leave>", self.on_leve)
-
+        #keyboard.on_press_key("enter", self.on_enter_pressed)
 
     def login1(self):
         mydp = mc.connect(host='localhost',
@@ -118,7 +123,7 @@ class Login:
         mycursor.execute(sql)
         res = mycursor.fetchone()
         if(res == None):
-            mb.showerror("Error", "Invalid Username and Password ! Please Try again")
+            mb.showerror("Error", "Invalid Username and Password ! Please Try again", parent = self.master)
         else:
             window = Toplevel()
             uni = University(window)
@@ -136,6 +141,8 @@ class Login:
         else:
             mb.showerror('Error', "لم يتم تفعيل خيار نسيت كلمة المرور")
 
+    # def on_enter_pressed(self, event):
+    #     self.Enter.invoke()
 
 
 

@@ -7,6 +7,7 @@ from datetime import datetime
 from tkcalendar import Calendar
 import webbrowser as web
 
+
 class University():
     def __init__(self, window):
         self.master = window
@@ -22,7 +23,7 @@ class University():
                          font=("tahoma", 50), pady=50)
         self.sms.pack()
 
-        self.bo = ttk.Notebook(self.master , padding=5, takefocus='bottom')
+        self.bo = ttk.Notebook(self.master, padding=5, takefocus='bottom')
         style = ttk.Style()
         style.configure("TNotebook.Tab", bg='#blue', fg='#17202A', font=('cairo', 15))
         self.tab1 = ttk.Frame(self.bo, width=30)
@@ -177,8 +178,9 @@ class StudentWindow:
         self.frameview.pack(fill=BOTH)
         self.scrollbar = Scrollbar(self.frameview, orient=VERTICAL)
         self.table = ttk.Treeview(self.frameview, columns=(
-        "ID", "FirstName", "LastName", "CIN", "Email", "Phone", "Date", "id_colleges", "id_Teacher"), show='headings',
-                                  yscrollcommand=self.scrollbar.set,height=400)
+            "ID", "FirstName", "LastName", "CIN", "Email", "Phone", "Date", "id_colleges", "id_Teacher"),
+                                  show='headings',
+                                  yscrollcommand=self.scrollbar.set, height=400)
         self.scrollbar.pack(side=RIGHT, fill=Y)
         self.table.pack(fill=BOTH)
 
@@ -258,7 +260,7 @@ class StudentWindow:
         sql = 'insert into student(FirstName,LastName,CIN,Email,Phone,Date,id_colleges,id_Techer) values (%s,%s,%s,%s,%s,%s,%s,%s)'
         if (len(self.FirstNameEntry.get()) == 0 or len(self.LastNameEntry.get()) == 0 or len(
                 self.CINEntry.get()) == 0 or len(self.EmailEntry.get()) == 0 or len(self.PhoneEntry.get()) == 0 or len(
-                self.DateEntry.get()) == 0 or len(self.id_colleges.get()) == 0 or len(self.id_Teacher.get()) == 0):
+            self.DateEntry.get()) == 0 or len(self.id_colleges.get()) == 0 or len(self.id_Teacher.get()) == 0):
             mb.showerror('Error', 'all Data is Empty', parent=self.master)
         else:
             st = self.EmailEntry.get().find('@gmail.com')
@@ -286,9 +288,9 @@ class StudentWindow:
                                                          parent=self.master)
                                         else:
                                             self.table.insert('', 'end', values=(
-                                            id1, self.FirstNameEntry.get(), self.LastNameEntry.get(),
-                                            self.CINEntry.get(), self.EmailEntry.get(), self.PhoneEntry.get(),
-                                            self.DateEntry.get(), self.id_Teacher.get(), self.id_colleges.get()))
+                                                id1, self.FirstNameEntry.get(), self.LastNameEntry.get(),
+                                                self.CINEntry.get(), self.EmailEntry.get(), self.PhoneEntry.get(),
+                                                self.DateEntry.get(), self.id_Teacher.get(), self.id_colleges.get()))
                                             mb.showinfo("Successfully added", 'Data inserted Successfully',
                                                         parent=self.master)
                                             self.read()
@@ -403,13 +405,13 @@ class StudentWindow:
         mycursor = mydp.cursor()
         try:
             sql = (
-                        'update student set FirstName=%s,LastName=%s,CIN=%s,Email=%s,Phone=%s,Date=%s,id_colleges=%s,id_Techer=%s where id = ' + self.iid)
+                    'update student set FirstName=%s,LastName=%s,CIN=%s,Email=%s,Phone=%s,Date=%s,id_colleges=%s,id_Techer=%s where id = ' + self.iid)
         except:
             mb.showerror('Error', 'لم يتم تحديد سطر')
             return 0
         if (len(self.FirstNameEntry.get()) == 0 or len(self.LastNameEntry.get()) == 0 or len(
                 self.CINEntry.get()) == 0 or len(self.EmailEntry.get()) == 0 or len(self.PhoneEntry.get()) == 0 or len(
-                self.DateEntry.get()) == 0 or len(self.id_colleges.get()) == 0 or len(self.id_Teacher.get()) == 0):
+            self.DateEntry.get()) == 0 or len(self.id_colleges.get()) == 0 or len(self.id_Teacher.get()) == 0):
             mb.showerror('Error', 'all Data is Empty', parent=self.master)
         else:
             st = self.EmailEntry.get().find('@gmail.com')
@@ -671,10 +673,10 @@ class StaffWindow:
                                                          parent=self.master)
                                         else:
                                             self.table.insert('', 'end', values=(
-                                            id1, self.FirstNameEntry.get(), self.LastNameEntry.get(),
-                                            self.CINEntry.get(),
-                                            self.EmailEntry.get(), self.PhoneEntry.get(), self.DateEntry.get(),
-                                            self.JopEntry.get()))
+                                                id1, self.FirstNameEntry.get(), self.LastNameEntry.get(),
+                                                self.CINEntry.get(),
+                                                self.EmailEntry.get(), self.PhoneEntry.get(), self.DateEntry.get(),
+                                                self.JopEntry.get()))
                                             mb.showinfo("Successfully added", 'Data inserted Successfully',
                                                         parent=self.master)
                                             # حذف بيانات الEntry
@@ -782,7 +784,7 @@ class StaffWindow:
         mycursor = mydp.cursor()
         try:
             sql = (
-                        'update staff set FirstName=%s,LastName=%s,CIN=%s,Email=%s,Phone=%s,Date=%s,Job = %s where id = ' + self.iid)
+                    'update staff set FirstName=%s,LastName=%s,CIN=%s,Email=%s,Phone=%s,Date=%s,Job = %s where id = ' + self.iid)
         except:
             mb.showerror('Error', 'لم يتم تحديد سطر')
             return 0
@@ -939,7 +941,7 @@ class examWindow:
         self.scrollbar = Scrollbar(self.frameview, orient=VERTICAL)
         self.table = ttk.Treeview(self.frameview,
                                   columns=(
-                                  "ID", "HallName", "ClassRoom", "Professor", "DataExam", "Time", "id_Colleges"),
+                                      "ID", "HallName", "ClassRoom", "Professor", "DataExam", "Time", "id_Colleges"),
                                   show='headings', yscrollcommand=self.scrollbar.set, height=500)
         self.scrollbar.pack(side=RIGHT, fill=Y)
         self.table.pack(fill=BOTH)
@@ -1251,7 +1253,7 @@ class Subject:
         self.scrollbar = Scrollbar(self.frameview, orient=VERTICAL)
         self.table = ttk.Treeview(self.frameview,
                                   columns=(
-                                  "ID", "NameSubject", "Units", "StartDate", "EndDate", "id_teacher", "id_collage"),
+                                      "ID", "NameSubject", "Units", "StartDate", "EndDate", "id_teacher", "id_collage"),
                                   show='headings', yscrollcommand=self.scrollbar.set)
         self.scrollbar.pack(side=RIGHT, fill=Y)
         self.table.pack(fill=BOTH)
@@ -1373,7 +1375,7 @@ class Subject:
         sql = 'insert into Subject(Name_Subject,Units,StartDate,EndDate,id_techer , id_colleges) values (%s,%s,%s,%s,%s,%s)'
         if (len(self.nameSubject.get()) == 0 or len(self.unitSubject.get()) == 0 or len(
                 self.StartDate.get_date()) == 0 or len(self.EndDate.get_date()) == 0 or len(
-                self.id_college.get()) == 0 or len(self.id_teacherE.get()) == 0):
+            self.id_college.get()) == 0 or len(self.id_teacherE.get()) == 0):
             mb.showerror('Error', 'all Data is Empty')
         else:
             # الحصول على التاريخ
@@ -1386,8 +1388,8 @@ class Subject:
                         mydp.commit()
                         id1 = mycursor.lastrowid  # للحصول على اخر id اضيف للجدول
                         self.table.insert('', 'end', values=(
-                        id1, self.nameSubject.get(), self.unitSubject.get(), self.StartDate.get_date(),
-                        self.EndDate.get_date(), self.id_teacherE.get(), self.id_college.get()))
+                            id1, self.nameSubject.get(), self.unitSubject.get(), self.StartDate.get_date(),
+                            self.EndDate.get_date(), self.id_teacherE.get(), self.id_college.get()))
                         mb.showinfo("Successfully added", 'Data inserted Successfully', parent=self.master)
                         # حذف بيانات الEntry
                         # self.nameStudent.delete(0, 'end')
@@ -1470,7 +1472,7 @@ class Subject:
         mycursor = mydp.cursor()
         try:
             sql = (
-                        'update subject set Name_Subject=%s,Units=%s,StartDate=%s,EndDate=%s,id_techer=%s,id_colleges=%s where id = ' + self.iid)
+                    'update subject set Name_Subject=%s,Units=%s,StartDate=%s,EndDate=%s,id_techer=%s,id_colleges=%s where id = ' + self.iid)
         except:
             mb.showerror('Error', 'لم يتم تحديد سطر', parent=self.master)
             return 0
@@ -1510,15 +1512,15 @@ class Subject:
             mb.showerror('Error', "لم يتم تحديد قيمة", parent=self.master)
 
     def registration(self):
-        self.reg = Frame(self.frameright, width=400)
-        self.reg.pack(side=RIGHT, fill=BOTH, pady=100, padx=100)
+        self.reg = Frame(self.frameright, width=400,height=500)
+        self.reg.pack(side=RIGHT, fill=Y, pady=50, padx=100)
 
         self.table1 = ttk.Treeview(self.reg, columns=("id_Student", "id_Subject", "Result"),
-                                   show='headings', height=400)
+                                   show='headings', height=600)
 
         self.table1.grid(row=0, column=0)
         self.regL = Frame(self.frameright, width=600)
-        self.regL.pack(side=LEFT, fill=BOTH, pady=100)
+        self.regL.pack(side=LEFT, fill=BOTH, pady=90)
 
         self.table1.heading("id_Student", text="id_Student")
         self.table1.heading("id_Subject", text="id_Subject")
@@ -1610,12 +1612,15 @@ class Subject:
         self.iid = None
 
     def show1(self, ev):
-        iid = self.table1.focus()  # الحصول على id الصف المحدد عليه في الجدول
-        alldata = self.table1.item(iid)  # الحصول على العناصر من الصف ووضعها في قاموس        print(alldata)
-        self.val = alldata['values']  # قائمة عناصر
-        self.id_St1.set(self.val[0])
-        self.id_Sub1.set(self.val[1])
-        self.result1.set(self.val[2])
+        try:
+            iid = self.table1.focus()  # الحصول على id الصف المحدد عليه في الجدول
+            alldata = self.table1.item(iid)  # الحصول على العناصر من الصف ووضعها في قاموس        print(alldata)
+            self.val = alldata['values']  # قائمة عناصر
+            self.id_St1.set(self.val[0])
+            self.id_Sub1.set(self.val[1])
+            self.result1.set(self.val[2])
+        except:
+            mb.showerror('Error','لم يتم تحديد قيمة')
 
     def Reset1(self):
         self.id_St.delete(0, 'end')
@@ -1748,7 +1753,7 @@ class College:
         self.scrollbar = Scrollbar(self.frameview, orient=VERTICAL)
         self.table = ttk.Treeview(self.frameview,
                                   columns=("ID", "NameCollege", "NumCourse", "NumTeacher"),
-                                  show='headings', yscrollcommand=self.scrollbar.set,height=400)
+                                  show='headings', yscrollcommand=self.scrollbar.set, height=400)
         self.scrollbar.pack(side=RIGHT, fill=Y)
         self.table.pack(fill=BOTH)
 
@@ -1829,7 +1834,7 @@ class College:
                             mydp.commit()
                             id1 = mycursor.lastrowid
                             self.table.insert('', 'end', values=(
-                            id1, self.NameCollege.get(), self.NumCourse.get(), self.NumTeacher.get()))
+                                id1, self.NameCollege.get(), self.NumCourse.get(), self.NumTeacher.get()))
                             mb.showinfo("Successfully added", 'Data inserted Successfully', parent=self.master)
                             # حذف بيانات الEntry
                             self.read()
@@ -2070,7 +2075,8 @@ class Add_User:
         if (len(self.EntryUser1.get()) == 0 or len(self.EntryUser1.get()) == 0 or len(self.NameAdmin.get()) == 0):
             mb.showerror('Error', 'يوجد حقول فارغة')
         else:
-            sql1 = ("select id from loginadmi where Username = '" + self.EntryUser1.get() + "' and Password = '" + self.Entrypass1.get() + "' and NameAdmin = '" + self.NameAdmin.get() + "' ")
+            sql1 = (
+                        "select id from loginadmi where Username = '" + self.EntryUser1.get() + "' and Password = '" + self.Entrypass1.get() + "' and NameAdmin = '" + self.NameAdmin.get() + "' ")
             mycursor.execute(sql1)
             qq = mycursor.fetchone()
             if qq == None:
@@ -2095,11 +2101,12 @@ class Add_User:
         mycursor = mydp.cursor()
         try:
             a = (
-                        "select id from loginadmi where Username = '" + self.EntryUser1.get() + "' and Password = '" + self.Entrypass1.get() + "' and NameAdmin = '" + self.NameAdmin.get() + "' ")
+                    "select id from loginadmi where Username = '" + self.EntryUser1.get() + "' and Password = '" + self.Entrypass1.get() + "' and NameAdmin = '" + self.NameAdmin.get() + "' ")
             mycursor.execute(a)
             mb1 = mycursor.fetchone()
             if mb1 != None:
-                sql = ("delete from loginadmi  where Username = '" + self.EntryUser1.get() + "' and Password = '" + self.Entrypass1.get() + "' and NameAdmin = '" + self.NameAdmin.get() + "'")
+                sql = (
+                            "delete from loginadmi  where Username = '" + self.EntryUser1.get() + "' and Password = '" + self.Entrypass1.get() + "' and NameAdmin = '" + self.NameAdmin.get() + "'")
                 mycursor.execute(sql)
                 mydp.commit()
                 mb.showinfo('Message', "نم حذف الحساب", parent=self.master)
@@ -2115,50 +2122,54 @@ class Add_User:
         self.Entrypass1.delete(0, 'end')
         self.NameAdmin.delete(0, 'end')
 
+
 class Login:
-    def __init__(self,window):
+    def __init__(self, window):
         self.master = window
         self.master.title("Login System ")
         self.height = self.master.winfo_screenheight()
         self.width = self.master.winfo_screenwidth()
         self.master.geometry("600x600+400+150")
-        self.master.resizable(width=False , height=False)
+        self.master.resizable(width=False, height=False)
         self.img = Image.open("pro/image/clipart2409514.png")
-        self.img.thumbnail((200,200))
-        self.new_img=ImageTk.PhotoImage(self.img)
-        self.imglabel = Label(self.master , image=self.new_img)
+        self.img.thumbnail((200, 200))
+        self.new_img = ImageTk.PhotoImage(self.img)
+        self.imglabel = Label(self.master, image=self.new_img)
         self.imglabel.pack()
 
-        self.frameEnter = Frame(self.master, height=200 , width= 500 )
+        self.frameEnter = Frame(self.master, height=200, width=500)
         self.frameEnter.pack()
 
-        self.EntryUser = Entry(self.frameEnter , width=25, font=('Tahoma',12))
-        self.EntryUser.grid(row=0 , column=1,pady=20)
-        self.Entrypass = Entry(self.frameEnter , width=25, font=('Tahoma',12) , show='*')
-        self.Entrypass.grid(row=1 , column=1 , pady=20 )
+        self.EntryUser = Entry(self.frameEnter, width=25, font=('Tahoma', 12))
+        self.EntryUser.grid(row=0, column=1, pady=20)
+        self.Entrypass = Entry(self.frameEnter, width=25, font=('Tahoma', 12), show='*')
+        self.Entrypass.grid(row=1, column=1, pady=20)
 
-        self.UserLabel = Label(self.frameEnter , text="UserName :" , font=('Tahoma',12,'bold'))
-        self.UserLabel.grid(row = 0 , column =0 )
-        self.passLabel = Label(self.frameEnter, text="Password :", font=('Tahoma',12,'bold'))
-        self.passLabel.grid(row=1 , column=0)
+        self.UserLabel = Label(self.frameEnter, text="UserName :", font=('Tahoma', 12, 'bold'))
+        self.UserLabel.grid(row=0, column=0)
+        self.passLabel = Label(self.frameEnter, text="Password :", font=('Tahoma', 12, 'bold'))
+        self.passLabel.grid(row=1, column=0)
 
         self.ch1 = IntVar()
 
-        self.ch = Checkbutton(self.master, text='Forget Password !', font=('Courier', 15, 'bold'), bg='whitesmoke',variable=self.ch1)
-        self.ch.place(x=140 , y=330)
+        self.ch = Checkbutton(self.master, text='Forget Password !', font=('Courier', 15, 'bold'), bg='whitesmoke',
+                              variable=self.ch1)
+        self.ch.place(x=140, y=330)
 
-        self.Enter = Button(self.frameEnter,command=self.login1 , width=25 , text="Login", pady=10 ,bg='#1b9ea4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='mouse')
-        self.Enter.grid(row=3 , column=0, sticky='snew',pady= 60 , padx=7)
-        self.mess = Button(self.frameEnter, command=self.search, width=25, text="Emergency", pady=10, bg='#1b9ea4',activeforeground='white', activebackground='#750E21', font=('tahoma', 10, 'bold'), cursor='mouse')
+        self.Enter = Button(self.frameEnter, command=self.login1, width=25, text="Login", pady=10, bg='#1b9ea4',
+                            activeforeground='white', activebackground='#750E21', font=('tahoma', 10, 'bold'),
+                            cursor='mouse')
+        self.Enter.grid(row=3, column=0, sticky='snew', pady=60, padx=7)
+        self.mess = Button(self.frameEnter, command=self.search, width=25, text="Emergency", pady=10, bg='#1b9ea4',
+                           activeforeground='white', activebackground='#750E21', font=('tahoma', 10, 'bold'),
+                           cursor='mouse')
         self.mess.grid(row=3, column=1, sticky='snew', pady=60, padx=7)
 
-        self.lab = Label(self.master , text='Log in to the system 2024', font=('Courier',11 ,'bold'),bg='whitesmoke')
-        self.lab.place(x=180 , y=560)
-
+        self.lab = Label(self.master, text='Log in to the system 2024', font=('Courier', 11, 'bold'), bg='whitesmoke')
+        self.lab.place(x=180, y=560)
 
         self.Enter.bind("<Enter>", self.on_enter)
         self.Enter.bind("<Leave>", self.on_leve)
-
 
     def login1(self):
         mydp = mc.connect(host='localhost',
@@ -2169,25 +2180,26 @@ class Login:
         sql = "select * from loginadmi where Username = '" + self.EntryUser.get() + "' and Password = '" + self.Entrypass.get() + "' "
         mycursor.execute(sql)
         res = mycursor.fetchone()
-        if(res == None):
+        if (res == None):
             mb.showerror("Error", "Invalid Username and Password ! Please Try again")
         else:
             window = Toplevel()
             uni = University(window)
             self.master.withdraw()
             mydp.close()
-    def on_enter(self , ev):
-        self.Enter['background']='#213363'
-    def on_leve(self , ev):
-        self.Enter['background']='#1b9ea4'
+
+    def on_enter(self, ev):
+        self.Enter['background'] = '#213363'
+
+    def on_leve(self, ev):
+        self.Enter['background'] = '#1b9ea4'
 
     def search(self):
-        if self.ch1.get() == 1 :
+        if self.ch1.get() == 1:
             e = 'https://api.whatsapp.com/send/?phone=%2B963991853387&text&type=phone_number&app_absent=0'
             web.open(e)
         else:
             mb.showerror('Error', "لم يتم تفعيل خيار نسيت كلمة المرور")
-
 
 
 if (__name__ == '__main__'):

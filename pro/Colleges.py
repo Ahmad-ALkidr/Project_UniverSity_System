@@ -28,15 +28,14 @@ class InfoWindow:
         self.master.title('Colleges Management System')
         self.master.geometry("800x600+150+150")
         #  side  تسمح خاصية باخذ العنصر لاقصى اليسار للوسط
-        self.frameleft = Frame(self.master, width=400)
+        self.frameleft = Frame(self.master, width=400, bg='#1b9ea4')
         self.frameleft.pack(side=LEFT, fill=Y)
-        self.frameleft.configure(bg='#EEF0E5')
         # -------------------------------------------------------#
-        self.FirstName = Label(self.frameleft, text='NameColleges', font=('tahoma', 10, 'bold'))
+        self.FirstName = Label(self.frameleft, text='NameColleges', font=('tahoma', 10, 'bold'),width=12)
         self.FirstName.place(x=10, y=50)
-        self.LastName = Label(self.frameleft, text='NumCourse', font=('tahoma', 10, 'bold'))
+        self.LastName = Label(self.frameleft, text='NumCourse', font=('tahoma', 10, 'bold'),width=12)
         self.LastName.place(x=10, y=120)
-        self.CIN = Label(self.frameleft, text='NumTeacher', font=('tahoma', 10, 'bold'))
+        self.CIN = Label(self.frameleft, text='NumTeacher', font=('tahoma', 10, 'bold'),width=12)
         self.CIN.place(x=10, y=190)
 
 
@@ -48,31 +47,49 @@ class InfoWindow:
         self.NumTeacher = StringVar()
 
         self.NameCollegeE = Entry(self.frameleft, fg='#4F4F4F', font=('tahoma', 12, 'bold'), textvariable=self.NameCollege)
-        self.NameCollegeE.place(x=100, y=50, width=200, height=30)
+        self.NameCollegeE.place(x=120, y=50, width=250, height=30)
         self.NumCourseE = Entry(self.frameleft, fg='#4F4F4F', font=('tahoma', 12, 'bold'), textvariable=self.NumCourse)
-        self.NumCourseE.place(x=100, y=120, width=200, height=30)
+        self.NumCourseE.place(x=120, y=120, width=250, height=30)
         self.NumTeacherE = Entry(self.frameleft, fg='#4F4F4F', font=('tahoma', 12, 'bold'), textvariable=self.NumTeacher)
-        self.NumTeacherE.place(x=100, y=190, width=200, height=30)
+        self.NumTeacherE.place(x=120, y=190, width=250, height=30)
 
-        self.add = Button(self.frameleft, command=self.add, text="add", bg='#1b9ea4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
+        self.img2 = Image.open('image/delete.png')
+        self.img2.thumbnail((30, 30))
+        self.new_im2 = ImageTk.PhotoImage(self.img2)
+
+        self.img0 = Image.open('image/add-file.png')
+        self.img0.thumbnail((30, 30))
+        self.new_im0 = ImageTk.PhotoImage(self.img0)
+
+        self.img1 = Image.open('image/rotation.png')
+        self.img1.thumbnail((30, 30))
+        self.new_im1 = ImageTk.PhotoImage(self.img1)
+
+        self.img4 = Image.open('image/cleaning.png')
+        self.img4.thumbnail((30, 30))
+        self.new_im4 = ImageTk.PhotoImage(self.img4)
+
+        self.img3 = Image.open('image/visual.png')
+        self.img3.thumbnail((30, 30))
+        self.new_im3 = ImageTk.PhotoImage(self.img3)
+
+        self.add = Button(self.frameleft, command=self.add, image=self.new_im0, bg='#D0D3D4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
         self.add.place(x=30, y=350, width=60, height=60)
-        self.Update = Button(self.frameleft, command=self.update, text="Update", bg='#1b9ea4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='mouse')
+        self.Update = Button(self.frameleft, command=self.update, image=self.new_im1, bg='#D0D3D4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='mouse')
         self.Update.place(x=105, y=350, width=60, height=60)
-        self.Delete = Button(self.frameleft, command=self.delete, text="Delete", bg='#1b9ea4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='mouse')
+        self.Delete = Button(self.frameleft, command=self.delete,image=self.new_im2, bg='#D0D3D4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='mouse')
         self.Delete.place(x=180, y=350, width=60, height=60)
-        self.Show = Button(self.frameleft, command=self.read, text="Show", bg='#1b9ea4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='mouse')
+        self.Show = Button(self.frameleft, command=self.read, image=self.new_im3, bg='#D0D3D4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='mouse')
         self.Show.place(x=255, y=350, width=60, height=60)
-        self.Rest = Button(self.frameleft, command=self.Reset, text="Rest", bg='#1b9ea4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='mouse')
+        self.Rest = Button(self.frameleft, command=self.Reset,image=self.new_im4, bg='#D0D3D4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='mouse')
         self.Rest.place(x=330, y=350, width=60, height=60)
 
         # ------------Start right top -----------------------#
-        self.frameright = Frame(self.master, width=800)
+        self.frameright = Frame(self.master, width=800,bg='#E5E7E9')
         self.frameright.pack(side=LEFT, fill=BOTH)
-        self.frameright.configure(bg='#EEF0E5')
         # ------------Start right top -----------------------#
-        self.framerighttop = Frame(self.frameright, height=50, pady=5, padx=5)
+        self.framerighttop = Frame(self.frameright, height=50, pady=5, padx=5,bg='#E5E7E9')
         self.framerighttop.pack(fill=X)
-        self.framerighttop.configure(bg='#EEF0E5')
 
         self.searchStudent = Entry(self.framerighttop, fg='#4F4F4F', font=('tahoma', 12, 'bold'), width=110)
         self.searchStudent.grid(row=0, column=0, sticky='nsew', padx=10, pady=10)
@@ -84,12 +101,12 @@ class InfoWindow:
         self.framerighttop.grid_columnconfigure(1, weight=1)
 
         # -------------------------- Frame Top View --------------------------#
-        self.frameview = Frame(self.frameright, bg='red')
+        self.frameview = Frame(self.frameright)
         self.frameview.pack(fill=BOTH)
         self.scrollbar = Scrollbar(self.frameview, orient=VERTICAL)
         self.table = ttk.Treeview(self.frameview,
                                   columns=("ID", "NameCollege", "NumCourse", "NumTeacher"),
-                                  show='headings', yscrollcommand=self.scrollbar.set)
+                                  show='headings', yscrollcommand=self.scrollbar.set,height=500)
         self.scrollbar.pack(side=RIGHT, fill=Y)
         self.table.pack(fill=BOTH)
 
@@ -124,27 +141,27 @@ class InfoWindow:
     def on_enter(self , ev):
         self.add['background'] = '#213363'
     def on_leve(self , ev):
-        self.add['background'] = '#1b9ea4'
+        self.add['background'] = '#D0D3D4'
 
     def on_enter1(self , ev):
         self.Update['background'] = '#213363'
     def on_leve1(self , ev):
-        self.Update['background'] = '#1b9ea4'
+        self.Update['background'] = '#D0D3D4'
 
     def on_enter2(self , ev):
         self.Delete['background'] = '#213363'
     def on_leve2(self , ev):
-        self.Delete['background'] = '#1b9ea4'
+        self.Delete['background'] = '#D0D3D4'
 
     def on_enter3(self , ev):
         self.Show['background'] = '#213363'
     def on_leve3(self , ev):
-        self.Show['background'] = '#1b9ea4'
+        self.Show['background'] = '#D0D3D4'
 
     def on_enter4(self , ev):
         self.Rest['background'] = '#213363'
     def on_leve4(self , ev):
-        self.Rest['background'] = '#1b9ea4'
+        self.Rest['background'] = '#D0D3D4'
 
     def add(self):
         mydp = mc.connect(host='localhost',

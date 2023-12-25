@@ -35,20 +35,20 @@ class exam:
         self.master.geometry("1200x600+0+0")
         # -------------------------------------------------------#
         #  side  تسمح خاصية باخذ العنصر لاقصى اليسار للوسط
-        self.frameleft = Frame(self.master, width=400)
+        self.frameleft = Frame(self.master, width=400,bg='#1b9ea4')
         self.frameleft.pack(side=LEFT, fill=Y)
         # -------------------------------------------------------#
-        self.nameLable = Label(self.frameleft, text='HallName :', font=('tahoma', 10, 'bold'))
+        self.nameLable = Label(self.frameleft, text='HallName :', font=('tahoma', 10, 'bold'),width=12)
         self.nameLable.place(x=10, y=20)
-        self.phonLabel = Label(self.frameleft, text='NumClassRoom :', font=('tahoma', 10, 'bold'))
+        self.phonLabel = Label(self.frameleft, text='NumClassRoom :', font=('tahoma', 10, 'bold'),width=12)
         self.phonLabel.place(x=10, y=80)
-        self.BookLabel = Label(self.frameleft, text='Professor :', font=('tahoma', 10, 'bold'))
+        self.BookLabel = Label(self.frameleft, text='Professor :', font=('tahoma', 10, 'bold'),width=12)
         self.BookLabel.place(x=10, y=140)
-        self.id_CollegesLabel = Label(self.frameleft, text='id_Colleges :', font=('tahoma', 10, 'bold'))
+        self.id_CollegesLabel = Label(self.frameleft, text='id_Colleges :', font=('tahoma', 10, 'bold'),width=12)
         self.id_CollegesLabel.place(x=10, y=200)
-        self.DateLabel = Label(self.frameleft, text='Date :', font=('tahoma', 10, 'bold'))
+        self.DateLabel = Label(self.frameleft, text='Date :', font=('tahoma', 10, 'bold'),width=12)
         self.DateLabel.place(x=10, y=250)
-        self.TimeLabel = Label(self.frameleft, text='Time :', font=('tahoma', 10, 'bold'))
+        self.TimeLabel = Label(self.frameleft, text='Time :', font=('tahoma', 10, 'bold'),width=12)
         self.TimeLabel.place(x=10, y=500)
 
         # الحصول على \
@@ -74,29 +74,49 @@ class exam:
         s = str(t).split('-')
         ss = s[2].split(' ')
 
-        self.DateExam = Calendar(self.frameleft, mindate=datetime.today())
+        self.DateExam = Calendar(self.frameleft)
         self.DateExam.place(x=130, y=250, width=250, height=200)
         self.Time = ttk.Combobox(self.frameleft, values=['', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00', '1:00'],
                                  font=('tahoma', 10, 'bold'), width=29, state='readonly',
                                  textvariable=self.time)
         self.Time.place(x=125, y=500)
 
-        self.add = Button(self.frameleft, command=self.add, text="add", bg='#1b9ea4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
+        self.img2 = Image.open('image/delete.png')
+        self.img2.thumbnail((30, 30))
+        self.new_im2 = ImageTk.PhotoImage(self.img2)
+
+        self.img0 = Image.open('image/add-file.png')
+        self.img0.thumbnail((30, 30))
+        self.new_im0 = ImageTk.PhotoImage(self.img0)
+
+        self.img1 = Image.open('image/rotation.png')
+        self.img1.thumbnail((30, 30))
+        self.new_im1 = ImageTk.PhotoImage(self.img1)
+
+        self.img4 = Image.open('image/cleaning.png')
+        self.img4.thumbnail((30, 30))
+        self.new_im4 = ImageTk.PhotoImage(self.img4)
+
+        self.img3 = Image.open('image/visual.png')
+        self.img3.thumbnail((30, 30))
+        self.new_im3 = ImageTk.PhotoImage(self.img3)
+
+        self.add = Button(self.frameleft, command=self.add, image=self.new_im0, bg='#D0D3D4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
         self.add.place(x=30, y=600, width=60, height=60)
-        self.Update = Button(self.frameleft, command=self.update, text="Update", bg='#1b9ea4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
+        self.Update = Button(self.frameleft, command=self.update, image=self.new_im1, bg='#D0D3D4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
         self.Update.place(x=105, y=600, width=60, height=60)
-        self.Delete = Button(self.frameleft, command=self.delete, text="Delete", bg='#1b9ea4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='mouse')
+        self.Delete = Button(self.frameleft, command=self.delete, image=self.new_im2, bg='#D0D3D4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='mouse')
         self.Delete.place(x=180, y=600, width=60, height=60)
-        self.Show = Button(self.frameleft, command=self.read, text="Show", bg='#1b9ea4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
+        self.Show = Button(self.frameleft, command=self.read, image=self.new_im3, bg='#D0D3D4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
         self.Show.place(x=255, y=600, width=60, height=60)
-        self.Rest = Button(self.frameleft, command=self.Reset, text="Rest", bg='#1b9ea4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
+        self.Rest = Button(self.frameleft, command=self.Reset, image=self.new_im4, bg='#D0D3D4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
         self.Rest.place(x=330, y=600, width=60, height=60)
 
         # ------------Start right top -----------------------#
-        self.frameright = Frame(self.master, width=800, bg='red')
+        self.frameright = Frame(self.master, width=800, bg='#E5E7E9')
         self.frameright.pack(side=LEFT, fill=Y)
         # ------------Start right top -----------------------#
-        self.framerighttop = Frame(self.frameright, height=50, pady=5, padx=5)
+        self.framerighttop = Frame(self.frameright, height=50, pady=5, padx=5,bg='#E5E7E9')
         self.framerighttop.pack(fill=X)
 
         self.searchStudent = Entry(self.framerighttop, fg='#4F4F4F', font=('tahoma', 12, 'bold'), width=110)
@@ -109,7 +129,7 @@ class exam:
         self.framerighttop.grid_columnconfigure(1, weight=1)
 
         # -------------------------- Frame Top View --------------------------#
-        self.frameview = Frame(self.frameright, bg='blue', height=600)
+        self.frameview = Frame(self.frameright, height=600)
         self.frameview.pack(fill=BOTH)
         self.scrollbar = Scrollbar(self.frameview, orient=VERTICAL)
         self.table = ttk.Treeview(self.frameview,
@@ -155,27 +175,27 @@ class exam:
     def on_enter(self , ev):
         self.add['background'] = '#213363'
     def on_leve(self , ev):
-        self.add['background'] = '#1b9ea4'
+        self.add['background'] = '#D0D3D4'
 
     def on_enter1(self , ev):
         self.Update['background'] = '#213363'
     def on_leve1(self , ev):
-        self.Update['background'] = '#1b9ea4'
+        self.Update['background'] = '#D0D3D4'
 
     def on_enter2(self , ev):
         self.Delete['background'] = '#213363'
     def on_leve2(self , ev):
-        self.Delete['background'] = '#1b9ea4'
+        self.Delete['background'] = '#D0D3D4'
 
     def on_enter3(self , ev):
         self.Show['background'] = '#213363'
     def on_leve3(self , ev):
-        self.Show['background'] = '#1b9ea4'
+        self.Show['background'] = '#D0D3D4'
 
     def on_enter4(self , ev):
         self.Rest['background'] = '#213363'
     def on_leve4(self , ev):
-        self.Rest['background'] = '#1b9ea4'
+        self.Rest['background'] = '#D0D3D4'
 
     def add(self):
         mydp = mc.connect(host='localhost',

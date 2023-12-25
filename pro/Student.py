@@ -29,25 +29,25 @@ class StudentWindow:
         self.master.geometry("1200x600+0+0")
         # -------------------------------------------------------#
         #  side  تسمح خاصية باخذ العنصر لاقصى اليسار للوسط
-        self.frameleft = Frame(self.master, width=400)
+        self.frameleft = Frame(self.master, width=400 , bg='#1b9ea4')
         self.frameleft.pack(side=LEFT, fill=Y)
         # -------------------------------------------------------#
-        self.FirstName = Label(self.frameleft , text='FirstName', font=('tahoma',10,'bold'))
-        self.FirstName.place(x=10,y=20)
-        self.LastName = Label(self.frameleft, text='LastName',font=('tahoma',10,'bold'))
-        self.LastName.place(x=10, y=60)
-        self.CIN = Label(self.frameleft, text='CIN',font=('tahoma',10,'bold'))
-        self.CIN.place(x=10, y=100)
-        self.Email = Label(self.frameleft, text='Email',font=('tahoma',10,'bold'))
-        self.Email.place(x=10, y=140)
-        self.Phone = Label(self.frameleft, text='Phone', font=('tahoma', 10, 'bold'))
-        self.Phone.place(x=10, y=180)
-        self.Date = Label(self.frameleft, text='Date', font=('tahoma', 10, 'bold'))
-        self.Date.place(x=10, y=220)
-        self.id_collegesL = Label(self.frameleft, text='id_colleges', font=('tahoma', 10, 'bold'))
-        self.id_collegesL.place(x=10, y=260)
-        self.id_TecherL = Label(self.frameleft, text='id_Techer', font=('tahoma', 10, 'bold'))
-        self.id_TecherL.place(x=10, y=300)
+        self.FirstName = Label(self.frameleft , text='FirstName', font=('tahoma',10,'bold'),width=12)
+        self.FirstName.place(x=10,y=22)
+        self.LastName = Label(self.frameleft, text='LastName',font=('tahoma',10,'bold'),width=12)
+        self.LastName.place(x=10, y=82)
+        self.CIN = Label(self.frameleft, text='CIN',font=('tahoma',10,'bold'),width=12)
+        self.CIN.place(x=10, y=142)
+        self.Email = Label(self.frameleft, text='Email',font=('tahoma',10,'bold'),width=12)
+        self.Email.place(x=10, y=202)
+        self.Phone = Label(self.frameleft, text='Phone', font=('tahoma', 10, 'bold'),width=12)
+        self.Phone.place(x=10, y=262)
+        self.Date = Label(self.frameleft, text='Date', font=('tahoma', 10, 'bold'),width=12)
+        self.Date.place(x=10, y=322)
+        self.id_collegesL = Label(self.frameleft, text='id_colleges', font=('tahoma', 10, 'bold'),width=12)
+        self.id_collegesL.place(x=10, y=382)
+        self.id_TecherL = Label(self.frameleft, text='id_Techer', font=('tahoma', 10, 'bold'),width=12)
+        self.id_TecherL.place(x=10, y=442)
 
         # الحصول على \
         #الدالة StringVar() في بايثون هي دالة لإنشاء متغير نصي. يمكن استخدام هذا المتغير لربطه بعناصر واجهة المستخدم الرسومية، مثل الحقول النصية، لإنشاء ربط ديناميكي بين عنصر واجهة المستخدم وبيانات التطبيق.
@@ -61,28 +61,28 @@ class StudentWindow:
         self.id_colleges1 = StringVar()
 
         self.FirstNameEntry = Entry(self.frameleft, fg='#4F4F4F',font=('tahoma',12,'bold'),textvariable=self.first)
-        self.FirstNameEntry.place(x=100, y=20,width=150,height=30)
+        self.FirstNameEntry.place(x=120, y=20,width=200,height=30)
         self.LastNameEntry = Entry(self.frameleft, fg='#4F4F4F',font=('tahoma',12,'bold'),textvariable=self.last)
-        self.LastNameEntry.place(x=100, y=60,width=150,height=30)
+        self.LastNameEntry.place(x=120, y=80,width=200,height=30)
         self.CINEntry = Entry(self.frameleft, fg='#4F4F4F',font=('tahoma',12,'bold'),textvariable=self.cin)
-        self.CINEntry.place(x=100, y=100,width=150,height=30)
+        self.CINEntry.place(x=120, y=140,width=200,height=30)
         self.EmailEntry = Entry(self.frameleft, fg='#4F4F4F',font=('tahoma',12,'bold'),textvariable=self.email)
-        self.EmailEntry.place(x=100, y=140,width=150,height=30)
+        self.EmailEntry.place(x=120, y=200,width=200,height=30)
         self.PhoneEntry = Entry(self.frameleft, fg='#4F4F4F',font=('tahoma',12,'bold'),textvariable=self.phone)
-        self.PhoneEntry.place(x=100, y=180, width=150, height=30)
+        self.PhoneEntry.place(x=120, y=260, width=200, height=30)
         self.DateEntry = Entry(self.frameleft, fg='#4F4F4F',font=('tahoma',12,'bold'),textvariable=self.date)
-        self.DateEntry.place(x=100, y=220, width=150, height=30)
+        self.DateEntry.place(x=120, y=320, width=200, height=30)
         self.id_colleges = Entry(self.frameleft, fg='#4F4F4F', font=('tahoma', 12, 'bold'), textvariable=self.id_colleges1)
-        self.id_colleges.place(x=100, y=260, width=150, height=30)
+        self.id_colleges.place(x=120, y=380, width=200, height=30)
         self.id_Teacher = Entry(self.frameleft, fg='#4F4F4F', font=('tahoma', 12, 'bold'), textvariable=self.id_Teacher1)
-        self.id_Teacher.place(x=100, y=300, width=150, height=30)
+        self.id_Teacher.place(x=120, y=440, width=200, height=30)
 
         self.var = IntVar()
         self.ra = Radiobutton(self.frameleft, text='Female', font=('Tahoma', 12, 'bold'), variable=self.var, value=1)
-        self.ra.place(x=100, y=350)
+        self.ra.place(x=100, y=500)
 
         self.ra1 = Radiobutton(self.frameleft, text='Male', font=('Tahoma', 12, 'bold'), variable=self.var, value=2)
-        self.ra1.place(x=200, y=350)
+        self.ra1.place(x=200, y=500)
 
         self.img0 = Image.open('image/delete.png')
         self.img0.thumbnail((30, 30))
@@ -105,22 +105,22 @@ class StudentWindow:
         self.new_im4 = ImageTk.PhotoImage(self.img4)
 
 
-        self.add = Button(self.frameleft,command=self.add, image=self.new_im1,bg='#1b9ea4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
-        self.add.place(x=30,y=400,width=60,height=60)
-        self.Update = Button(self.frameleft,command=self.update ,image=self.new_im2,bg='#1b9ea4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
-        self.Update.place(x=105, y=400,width=60,height=60)
-        self.Delete = Button(self.frameleft,command=self.delete,image=self.new_im0,bg='#1b9ea4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='mouse')
-        self.Delete.place(x=180, y=400,width=60,height=60)
-        self.Show = Button(self.frameleft, command=self.read, image=self.new_im4, bg='#1b9ea4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
-        self.Show.place(x=255, y=400, width=60, height=60)
-        self.Rest = Button(self.frameleft, command=self.Reset, image=self.new_im3, bg='#1b9ea4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
-        self.Rest.place(x=330, y=400, width=60, height=60)
+        self.add = Button(self.frameleft,command=self.add, image=self.new_im1,bg='#E5E7E9',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
+        self.add.place(x=30,y=550,width=60,height=60)
+        self.Update = Button(self.frameleft,command=self.update ,image=self.new_im2,bg='#E5E7E9',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
+        self.Update.place(x=105, y=550 ,width=60,height=60)
+        self.Delete = Button(self.frameleft,command=self.delete,image=self.new_im0,bg='#E5E7E9',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='mouse')
+        self.Delete.place(x=180, y=550,width=60,height=60)
+        self.Show = Button(self.frameleft, command=self.read, image=self.new_im4, bg='#E5E7E9',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
+        self.Show.place(x=255, y=550, width=60, height=60)
+        self.Rest = Button(self.frameleft, command=self.Reset, image=self.new_im3, bg='#E5E7E9',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
+        self.Rest.place(x=330, y=550, width=60, height=60)
 
         # ------------Start right top -----------------------#
-        self.frameright = Frame(self.master, width=800)
+        self.frameright = Frame(self.master, width=800,bg='#D0D3D4')
         self.frameright.pack(side=LEFT, fill=BOTH)
         # ------------Start right top -----------------------#
-        self.framerighttop=Frame(self.frameright , height=50 , pady=5,padx=5)
+        self.framerighttop=Frame(self.frameright , height=50 , pady=5,padx=5,bg='#E5E7E9')
         self.framerighttop.pack(fill=X)
 
         self.searchStudent = Entry(self.framerighttop,fg='#4F4F4F',font=('tahoma',12,'bold'),width=110)
@@ -132,10 +132,10 @@ class StudentWindow:
         self.framerighttop.grid_columnconfigure(1, weight=1)
 
         # -------------------------- Frame Top View --------------------------#
-        self.frameview = Frame(self.frameright,bg='red')
+        self.frameview = Frame(self.frameright)
         self.frameview.pack(fill=BOTH)
         self.scrollbar = Scrollbar(self.frameview,orient=VERTICAL)
-        self.table = ttk.Treeview(self.frameview,columns=("ID","FirstName","LastName","CIN","Email","Phone","Date","id_colleges","id_Teacher","Gender"),show='headings',yscrollcommand=self.scrollbar.set)
+        self.table = ttk.Treeview(self.frameview,columns=("ID","FirstName","LastName","CIN","Email","Phone","Date","id_colleges","id_Teacher","Gender"),show='headings',yscrollcommand=self.scrollbar.set,height=500)
         self.scrollbar.pack(side=RIGHT,fill=Y)
         self.table.pack(fill=BOTH)
 
@@ -182,27 +182,27 @@ class StudentWindow:
     def on_enter(self , ev):
         self.add['background'] = '#213363'
     def on_leve(self , ev):
-        self.add['background'] = '#1b9ea4'
+        self.add['background'] = '#E5E7E9'
 
     def on_enter1(self , ev):
         self.Update['background'] = '#213363'
     def on_leve1(self , ev):
-        self.Update['background'] = '#1b9ea4'
+        self.Update['background'] = '#E5E7E9'
 
     def on_enter2(self , ev):
         self.Delete['background'] = '#213363'
     def on_leve2(self , ev):
-        self.Delete['background'] = '#1b9ea4'
+        self.Delete['background'] = '#E5E7E9'
 
     def on_enter3(self , ev):
         self.Show['background'] = '#213363'
     def on_leve3(self , ev):
-        self.Show['background'] = '#1b9ea4'
+        self.Show['background'] = '#E5E7E9'
 
     def on_enter4(self , ev):
         self.Rest['background'] = '#213363'
     def on_leve4(self , ev):
-        self.Rest['background'] = '#1b9ea4'
+        self.Rest['background'] = '#E5E7E9'
 
 
     def add(self):

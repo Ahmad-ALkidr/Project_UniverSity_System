@@ -30,23 +30,23 @@ class StaffWindow:
         self.master.title('Staff Management System')
         self.master.geometry("800x600+150+150")
         #  side  تسمح خاصية باخذ العنصر لاقصى اليسار للوسط
-        self.frameleft = Frame(self.master, width=400)
+        self.frameleft = Frame(self.master, width=400,bg='#1b9ea4')
         self.frameleft.pack(side=LEFT, fill=Y)
         # -------------------------------------------------------#
-        self.FirstName = Label(self.frameleft, text='FirstName', font=('tahoma', 10, 'bold'))
-        self.FirstName.place(x=10, y=20)
-        self.LastName = Label(self.frameleft, text='LastName', font=('tahoma', 10, 'bold'))
-        self.LastName.place(x=10, y=60)
-        self.CIN = Label(self.frameleft, text='CIN', font=('tahoma', 10, 'bold'))
-        self.CIN.place(x=10, y=100)
-        self.Email = Label(self.frameleft, text='Email', font=('tahoma', 10, 'bold'))
-        self.Email.place(x=10, y=140)
-        self.Phone = Label(self.frameleft, text='Phone', font=('tahoma', 10, 'bold'))
-        self.Phone.place(x=10, y=180)
-        self.Date = Label(self.frameleft, text='Date', font=('tahoma', 10, 'bold'))
-        self.Date.place(x=10, y=220)
-        self.Jop = Label(self.frameleft, text='Jop', font=('tahoma', 10, 'bold'))
-        self.Jop.place(x=10, y=280)
+        self.FirstName = Label(self.frameleft, text='FirstName', font=('tahoma', 10, 'bold'),width=12)
+        self.FirstName.place(x=10, y=22)
+        self.LastName = Label(self.frameleft, text='LastName', font=('tahoma', 10, 'bold'),width=12)
+        self.LastName.place(x=10, y=62)
+        self.CIN = Label(self.frameleft, text='CIN', font=('tahoma', 10, 'bold'),width=12)
+        self.CIN.place(x=10, y=102)
+        self.Email = Label(self.frameleft, text='Email', font=('tahoma', 10, 'bold'),width=12)
+        self.Email.place(x=10, y=142)
+        self.Phone = Label(self.frameleft, text='Phone', font=('tahoma', 10, 'bold'),width=12)
+        self.Phone.place(x=10, y=182)
+        self.Date = Label(self.frameleft, text='Date', font=('tahoma', 10, 'bold'),width=12)
+        self.Date.place(x=10, y=222)
+        self.Jop = Label(self.frameleft, text='Jop', font=('tahoma', 10, 'bold'),width=12)
+        self.Jop.place(x=10, y=282)
 
 
         # الحصول على \
@@ -60,36 +60,56 @@ class StaffWindow:
         self.jopEntry = StringVar()
 
         self.FirstNameEntry = Entry(self.frameleft, fg='#4F4F4F', font=('tahoma', 12, 'bold'), textvariable=self.first)
-        self.FirstNameEntry.place(x=100, y=20, width=200, height=30)
+        self.FirstNameEntry.place(x=130, y=20, width=250, height=30)
         self.LastNameEntry = Entry(self.frameleft, fg='#4F4F4F', font=('tahoma', 12, 'bold'), textvariable=self.last)
-        self.LastNameEntry.place(x=100, y=60, width=200, height=30)
+        self.LastNameEntry.place(x=130, y=60, width=250, height=30)
         self.CINEntry = Entry(self.frameleft, fg='#4F4F4F', font=('tahoma', 12, 'bold'), textvariable=self.cin)
-        self.CINEntry.place(x=100, y=100, width=200, height=30)
+        self.CINEntry.place(x=130, y=100, width=250, height=30)
         self.EmailEntry = Entry(self.frameleft, fg='#4F4F4F', font=('tahoma', 12, 'bold'), textvariable=self.email)
-        self.EmailEntry.place(x=100, y=140, width=200, height=30)
+        self.EmailEntry.place(x=130, y=140, width=250, height=30)
         self.PhoneEntry = Entry(self.frameleft, fg='#4F4F4F', font=('tahoma', 12, 'bold'), textvariable=self.phone)
-        self.PhoneEntry.place(x=100, y=180, width=200, height=30)
+        self.PhoneEntry.place(x=130, y=180, width=250, height=30)
         self.DateEntry = Entry(self.frameleft, fg='#4F4F4F', font=('tahoma', 12, 'bold'), textvariable=self.date)
-        self.DateEntry.place(x=100, y=220, width=200, height=30)
-        self.JopEntry = ttk.Combobox(self.frameleft, values=['', 'Professor', 'Employee', 'Technicain'],font=('tahoma', 10, 'bold'), width=22 , state='readonly',textvariable=self.jopEntry)
-        self.JopEntry.place(x=100, y=280)
+        self.DateEntry.place(x=130, y=220, width=250, height=30)
+        self.JopEntry = ttk.Combobox(self.frameleft, values=['', 'Professor', 'Employee', 'Technicain'],font=('tahoma', 10, 'bold'), width=25 , state='readonly',textvariable=self.jopEntry)
+        self.JopEntry.place(x=130, y=280)
 
-        self.add = Button(self.frameleft, command=self.add, text="add", bg='#1b9ea4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
+        self.img2 = Image.open('image/delete.png')
+        self.img2.thumbnail((30, 30))
+        self.new_im2 = ImageTk.PhotoImage(self.img2)
+
+        self.img0 = Image.open('image/add-file.png')
+        self.img0.thumbnail((30, 30))
+        self.new_im0 = ImageTk.PhotoImage(self.img0)
+
+        self.img1 = Image.open('image/rotation.png')
+        self.img1.thumbnail((30, 30))
+        self.new_im1 = ImageTk.PhotoImage(self.img1)
+
+        self.img4 = Image.open('image/cleaning.png')
+        self.img4.thumbnail((30, 30))
+        self.new_im4 = ImageTk.PhotoImage(self.img4)
+
+        self.img3 = Image.open('image/visual.png')
+        self.img3.thumbnail((30, 30))
+        self.new_im3 = ImageTk.PhotoImage(self.img3)
+
+        self.add = Button(self.frameleft, command=self.add, image=self.new_im0, bg='#D0D3D4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
         self.add.place(x=30, y=350, width=60, height=60)
-        self.Update = Button(self.frameleft, command=self.update, text="Update", bg='#1b9ea4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
+        self.Update = Button(self.frameleft, command=self.update,image=self.new_im1, bg='#D0D3D4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
         self.Update.place(x=105, y=350, width=60, height=60)
-        self.Delete = Button(self.frameleft, command=self.delete, text="Delete", bg='#1b9ea4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='mouse')
+        self.Delete = Button(self.frameleft, command=self.delete, image=self.new_im2, bg='#D0D3D4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='mouse')
         self.Delete.place(x=180, y=350, width=60, height=60)
-        self.Show = Button(self.frameleft, command=self.read, text="Show", bg='#1b9ea4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
+        self.Show = Button(self.frameleft, command=self.read, image=self.new_im3, bg='#D0D3D4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
         self.Show.place(x=255, y=350, width=60, height=60)
-        self.Rest = Button(self.frameleft, command=self.Reset, text="Rest", bg='#1b9ea4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
+        self.Rest = Button(self.frameleft, command=self.Reset, image=self.new_im4, bg='#D0D3D4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
         self.Rest.place(x=330, y=350, width=60, height=60)
 
         # ------------Start right top -----------------------#
-        self.frameright = Frame(self.master, width=800)
+        self.frameright = Frame(self.master, width=800,bg='#E5E7E9')
         self.frameright.pack(side=LEFT, fill=BOTH)
         # ------------Start right top -----------------------#
-        self.framerighttop = Frame(self.frameright, height=50, pady=5, padx=5)
+        self.framerighttop = Frame(self.frameright, height=50, pady=5, padx=5,bg='#E5E7E9')
         self.framerighttop.pack(fill=X)
 
         self.searchStudent = Entry(self.framerighttop, fg='#4F4F4F', font=('tahoma', 12, 'bold'), width=110)
@@ -107,7 +127,7 @@ class StaffWindow:
         self.scrollbar = Scrollbar(self.frameview, orient=VERTICAL)
         self.table = ttk.Treeview(self.frameview,
                                   columns=("ID", "FirstName", "LastName", "CIN", "Email", "Phone", "Date","Jop"),
-                                  show='headings', yscrollcommand=self.scrollbar.set)
+                                  show='headings', yscrollcommand=self.scrollbar.set,height=500)
         self.scrollbar.pack(side=RIGHT, fill=Y)
         self.table.pack(fill=BOTH)
 
@@ -149,27 +169,27 @@ class StaffWindow:
     def on_enter(self , ev):
         self.add['background'] = '#213363'
     def on_leve(self , ev):
-        self.add['background'] = '#1b9ea4'
+        self.add['background'] = '#D0D3D4'
 
     def on_enter1(self , ev):
         self.Update['background'] = '#213363'
     def on_leve1(self , ev):
-        self.Update['background'] = '#1b9ea4'
+        self.Update['background'] = '#D0D3D4'
 
     def on_enter2(self , ev):
         self.Delete['background'] = '#213363'
     def on_leve2(self , ev):
-        self.Delete['background'] = '#1b9ea4'
+        self.Delete['background'] = '#D0D3D4'
 
     def on_enter3(self , ev):
         self.Show['background'] = '#213363'
     def on_leve3(self , ev):
-        self.Show['background'] = '#1b9ea4'
+        self.Show['background'] = '#D0D3D4'
 
     def on_enter4(self , ev):
         self.Rest['background'] = '#213363'
     def on_leve4(self , ev):
-        self.Rest['background'] = '#1b9ea4'
+        self.Rest['background'] = '#D0D3D4'
 
     def add(self):
         mydp = mc.connect(host='localhost',

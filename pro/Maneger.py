@@ -1,10 +1,8 @@
 from tkinter import *
-from tkinter import ttk
 from PIL import Image,ImageTk
 import mysql.connector as mc
 import tkinter.messagebox as mb
-from tkcalendar import Calendar
-from datetime import datetime
+
 
 class Maneger:
     def __init__(self,bottomFrame):
@@ -30,27 +28,40 @@ class maneger :
         self.height = self.master.winfo_screenheight()
         self.width = self.master.winfo_screenwidth()
         self.master.geometry("600x600+400+150")
+        self.master.resizable(width=False, height=False)
+        self.laF = LabelFrame(self.master, width=550, height=500, text='(❁´◡`❁)-Login System-(❁´◡`❁)',
+                              font=('Tahoma', 12, 'bold'))
+        self.laF.pack()
         self.img = Image.open("image/clipart2409514.png")
-        self.img.thumbnail((200,200))
-        self.new_img=ImageTk.PhotoImage(self.img)
-        self.imglabel = Label(self.master , image=self.new_img)
+        self.img.thumbnail((200, 200))
+        self.new_img = ImageTk.PhotoImage(self.img)
+        self.imglabel = Label(self.laF, image=self.new_img)
         self.imglabel.pack()
 
-        self.frameEnter = Frame(self.master, height=200 , width= 500 )
+        self.frameEnter = Frame(self.laF, height=200, width=600)
         self.frameEnter.pack()
 
-        self.EntryUser = Entry(self.frameEnter , width=25, font=('Tahoma',12))
-        self.EntryUser.grid(row=0 , column=1,pady=20)
-        self.Entrypass = Entry(self.frameEnter , width=25, font=('Tahoma',12) , show='*')
-        self.Entrypass.grid(row=1 , column=1 , pady=20 )
+        self.EntryUser = Entry(self.frameEnter, width=23, font=('Tahoma', 12))
+        self.EntryUser.grid(row=0, column=1, pady=10)
+        self.Entrypass = Entry(self.frameEnter, width=23, font=('Tahoma', 12), show='*')
+        self.Entrypass.grid(row=1, column=1, pady=15)
 
-        self.UserLabel = Label(self.frameEnter , text="UserName :" , font=('Tahoma',12,'bold'))
-        self.UserLabel.grid(row = 0 , column =0 )
-        self.passLabel = Label(self.frameEnter, text="Password :", font=('Tahoma',12,'bold'))
-        self.passLabel.grid(row=1 , column=0)
+        self.UserLabel = Label(self.frameEnter, text="UserName :", font=('Tahoma', 12, 'bold'))
+        self.UserLabel.grid(row=0, column=0)
+        self.passLabel = Label(self.frameEnter, text="Password :", font=('Tahoma', 12, 'bold'))
+        self.passLabel.grid(row=1, column=0)
 
-        self.Enter = Button(self.frameEnter,command=self.login1 , width=25 , text="Add user" , pady=10 ,bg='#1b9ea4')
-        self.Enter.grid(row=2 , column=0 ,columnspan=2 ,sticky='snew',pady= 7 , padx=7)
+        self.Enter = Button(self.frameEnter, command=self.login1, width=25, text="Login", pady=10, bg='#1b9ea4',
+                            activeforeground='white', activebackground='#750E21', font=('tahoma', 10, 'bold'),
+                            cursor='mouse')
+        self.Enter.grid(row=3, column=0,columnspan=2, sticky='snew', pady=80)
+
+        self.Enter.bind("<Enter>", self.on_enter)
+        self.Enter.bind("<Leave>", self.on_leve)
+    def on_enter(self , ev):
+        self.Enter['background']='#213363'
+    def on_leve(self , ev):
+        self.Enter['background']='#1b9ea4'
 
 
     def login1(self):

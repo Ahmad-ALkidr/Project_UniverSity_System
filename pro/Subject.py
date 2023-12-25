@@ -31,23 +31,23 @@ class library:
         self.master.geometry("1200x600+0+0")
         # -------------------------------------------------------#
         #  side  تسمح خاصية باخذ العنصر لاقصى اليسار للوسط
-        self.frameleft = Frame(self.master, width=400)
+        self.frameleft = Frame(self.master, width=400,bg='#1b9ea4')
         self.frameleft.pack(side=LEFT, fill=Y)
         # -------------------------------------------------------#
-        self.nameLable = Label(self.frameleft, text='NameSubject :', font=('tahoma', 10, 'bold'))
+        self.nameLable = Label(self.frameleft, text='NameSubject :', font=('tahoma', 10, 'bold'),width=12)
         self.nameLable.place(x=10, y=20)
-        self.UnitLabel = Label(self.frameleft, text='UnitSubject :', font=('tahoma', 10, 'bold'))
+        self.UnitLabel = Label(self.frameleft, text='UnitSubject :', font=('tahoma', 10, 'bold'),width=12)
         self.UnitLabel.place(x=10, y=80)
 
-        self.id_teacherL = Label(self.frameleft, text='id_teacher :', font=('tahoma', 10, 'bold'))
+        self.id_teacherL = Label(self.frameleft, text='id_teacher :', font=('tahoma', 10, 'bold'),width=12)
         self.id_teacherL.place(x=10, y=140)
 
-        self.id_collegeL = Label(self.frameleft, text='id_college :', font=('tahoma', 10, 'bold'))
+        self.id_collegeL = Label(self.frameleft, text='id_college :', font=('tahoma', 10, 'bold'),width=12)
         self.id_collegeL.place(x=10, y=200)
 
-        self.StartDateLabel = Label(self.frameleft, text='StartDate :', font=('tahoma', 10, 'bold'))
+        self.StartDateLabel = Label(self.frameleft, text='StartDate :', font=('tahoma', 10, 'bold'),width=12)
         self.StartDateLabel.place(x=10, y=250)
-        self.EndDateLabel = Label(self.frameleft, text='EndDate :', font=('tahoma', 10, 'bold'))
+        self.EndDateLabel = Label(self.frameleft, text='EndDate :', font=('tahoma', 10, 'bold'),width=12)
         self.EndDateLabel.place(x=10, y=470)
 
         # الحصول على \
@@ -80,10 +80,10 @@ class library:
 
 
         # ------------Start right top -----------------------#
-        self.frameright = Frame(self.master, width=800)
+        self.frameright = Frame(self.master, width=800,bg='#E5E7E9')
         self.frameright.pack(side=LEFT, fill=BOTH)
         # ------------Start right top -----------------------#
-        self.framerighttop = Frame(self.frameright, height=50, pady=5, padx=5)
+        self.framerighttop = Frame(self.frameright, height=50, pady=5, padx=5,bg='#E5E7E9')
         self.framerighttop.pack(fill=X)
 
         self.searchStudent = Entry(self.framerighttop, fg='#4F4F4F', font=('tahoma', 12, 'bold'), width=110)
@@ -101,7 +101,7 @@ class library:
         self.scrollbar = Scrollbar(self.frameview, orient=VERTICAL)
         self.table = ttk.Treeview(self.frameview,
                                   columns=("ID", "NameSubject", "Units", "StartDate","EndDate","id_teacher","id_collage"),
-                                  show='headings', yscrollcommand=self.scrollbar.set)
+                                  show='headings', yscrollcommand=self.scrollbar.set,height=600)
         self.scrollbar.pack(side=RIGHT, fill=Y)
         self.table.pack(fill=BOTH)
 
@@ -121,39 +121,39 @@ class library:
         self.table.column("id_teacher", anchor=W,width=30)
         self.table.column("id_collage", anchor=W , width=30)
         # self.read()
-        self.img0 = Image.open('image/delete.png')
-        self.img0.thumbnail((30, 30))
-        self.new_im0 = ImageTk.PhotoImage(self.img0)
-
-        self.img1 = Image.open('image/add-file.png')
-        self.img1.thumbnail((30, 30))
-        self.new_im1 = ImageTk.PhotoImage(self.img1)
-
-        self.img2 = Image.open('image/rotation.png')
+        self.img2 = Image.open('image/delete.png')
         self.img2.thumbnail((30, 30))
         self.new_im2 = ImageTk.PhotoImage(self.img2)
 
-        self.img3 = Image.open('image/cleaning.png')
-        self.img3.thumbnail((30, 30))
-        self.new_im3 = ImageTk.PhotoImage(self.img3)
+        self.img0 = Image.open('image/add-file.png')
+        self.img0.thumbnail((30, 30))
+        self.new_im0 = ImageTk.PhotoImage(self.img0)
 
-        self.img4 = Image.open('image/visual.png')
+        self.img1 = Image.open('image/rotation.png')
+        self.img1.thumbnail((30, 30))
+        self.new_im1 = ImageTk.PhotoImage(self.img1)
+
+        self.img4 = Image.open('image/cleaning.png')
         self.img4.thumbnail((30, 30))
         self.new_im4 = ImageTk.PhotoImage(self.img4)
 
+        self.img3 = Image.open('image/visual.png')
+        self.img3.thumbnail((30, 30))
+        self.new_im3 = ImageTk.PhotoImage(self.img3)
 
-        self.add = Button(self.frameright, command=self.add,image=self.new_im1, bg='#1b9ea4'  , activebackground='#750E21', activeforeground='white' , font=('Tahoma',10 , 'bold'),cursor='plus')
-        self.add.place(x=30, y=300, width=60, height=60)
-        self.Update = Button(self.frameright, command=self.update, image=self.new_im2, bg='#1b9ea4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
-        self.Update.place(x=105, y=300, width=60, height=60)
-        self.Delete = Button(self.frameright, command=self.delete, image=self.new_im0, bg='#1b9ea4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='mouse')
-        self.Delete.place(x=180, y=300, width=60, height=60)
-        self.Show = Button(self.frameright, command=self.read, image=self.new_im4, bg='#1b9ea4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
-        self.Show.place(x=255, y=300, width=60, height=60)
-        self.Rest = Button(self.frameright, command=self.Reset, image=self.new_im3, bg='#1b9ea4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
-        self.Rest.place(x=330, y=300, width=60, height=60)
-        self.Re = Button(self.frameright, command=self.registration, text="registration", bg='#0766AD',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
-        self.Re.place(x=405, y=300, width=80, height=60)
+
+        self.add = Button(self.frameleft, command=self.add,image=self.new_im0, bg='#D0D3D4'  , activebackground='#750E21', activeforeground='white' , font=('Tahoma',10 , 'bold'),cursor='plus')
+        self.add.place(x=30, y=700, width=60, height=60)
+        self.Update = Button(self.frameleft, command=self.update, image=self.new_im1, bg='#D0D3D4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
+        self.Update.place(x=105, y=700, width=60, height=60)
+        self.Delete = Button(self.frameleft, command=self.delete, image=self.new_im2, bg='#D0D3D4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='mouse')
+        self.Delete.place(x=180, y=700, width=60, height=60)
+        self.Show = Button(self.frameleft, command=self.read, image=self.new_im3, bg='#D0D3D4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
+        self.Show.place(x=255, y=700, width=60, height=60)
+        self.Rest = Button(self.frameleft, command=self.Reset, image=self.new_im4, bg='#D0D3D4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
+        self.Rest.place(x=330, y=700, width=60, height=60)
+        self.Re = Button(self.frameleft, command=self.registration, text="registration", bg='#D0D3D4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
+        self.Re.place(x=405, y=700, width=80, height=60)
 
 
 
@@ -177,27 +177,27 @@ class library:
     def on_enter(self , ev):
         self.add['background'] = '#213363'
     def on_leve(self , ev):
-        self.add['background'] = '#1b9ea4'
+        self.add['background'] = '#D0D3D4'
 
     def on_enter1(self , ev):
         self.Update['background'] = '#213363'
     def on_leve1(self , ev):
-        self.Update['background'] = '#1b9ea4'
+        self.Update['background'] = '#D0D3D4'
 
     def on_enter2(self , ev):
         self.Delete['background'] = '#213363'
     def on_leve2(self , ev):
-        self.Delete['background'] = '#1b9ea4'
+        self.Delete['background'] = '#D0D3D4'
 
     def on_enter3(self , ev):
         self.Show['background'] = '#213363'
     def on_leve3(self , ev):
-        self.Show['background'] = '#1b9ea4'
+        self.Show['background'] = '#D0D3D4'
 
     def on_enter4(self , ev):
         self.Rest['background'] = '#213363'
     def on_leve4(self , ev):
-        self.Rest['background'] = '#1b9ea4'
+        self.Rest['background'] = '#D0D3D4'
 
 
     def add(self):
@@ -343,7 +343,7 @@ class library:
                                   show='headings', height=400)
 
         self.table1.grid(row=0, column=0 )
-        self.regL = Frame(self.frameright,  width=600)
+        self.regL = Frame(self.frameright,  width=600,bg='#E5E7E9')
         self.regL.pack(side=LEFT, fill=BOTH, pady=100)
 
         self.table1.heading("id_Student", text="id_Student")
@@ -374,15 +374,15 @@ class library:
         self.result.place(x=150, y=110, height=30)
 
 
-        self.add1 = Button(self.regL, command=self.add_registration, text="Add", bg='#0766AD', width=7, pady=10)
+        self.add1 = Button(self.regL, command=self.add_registration, text="Add", bg='#1b9ea4', width=7, pady=10)
         self.add1.place(x=50, y=200)
-        self.Update1 = Button(self.regL, command=self.update1, text="Update", bg='#0766AD', width=7, pady=10)
+        self.Update1 = Button(self.regL, command=self.update1, text="Update", bg='#1b9ea4', width=7, pady=10)
         self.Update1.place(x=125, y=200)
-        self.Delete1 = Button(self.regL, command=self.delete1, text="Delete", bg='#0766AD', width=7, pady=10)
+        self.Delete1 = Button(self.regL, command=self.delete1, text="Delete", bg='#1b9ea4', width=7, pady=10)
         self.Delete1.place(x=50, y=270)
-        self.Show1 = Button(self.regL, command=self.read1, text="Show", bg='#0766AD', width=7, pady=10)
+        self.Show1 = Button(self.regL, command=self.read1, text="Show", bg='#1b9ea4', width=7, pady=10)
         self.Show1.place(x=125, y=270)
-        self.rest = Button(self.regL, command=self.Reset1, text="Rest", bg='#0766AD', width=7, pady=10)
+        self.rest = Button(self.regL, command=self.Reset1, text="Rest", bg='#1b9ea4', width=7, pady=10)
         self.rest.place(x=200, y=200)
 
         self.table1.bind('<ButtonRelease>', self.show1)
@@ -393,25 +393,58 @@ class library:
                           password='',
                           database="un")
         mycursor = mydp.cursor()
-        sql = 'insert into students_grades(id_Student,id_Subject,result) values (%s,%s,%s)'
         if (len(self.id_St.get()) == 0 or len(self.id_Sub.get()) == 0 or len(self.result.get()) == 0):
             mb.showerror('Error', 'يوجد حقول فارغة', parent=self.master)
+            return 0
         else:
             if self.id_St.get().isdigit():
                 if self.id_Sub.get().isdigit():
                     if self.result.get().isdigit():
                         try:
+                            mycursor = mydp.cursor()
+                            sql = 'insert into students_grades(id_Student,id_Subject,result) values (%s,%s,%s)'
                             val = (self.id_St.get(), self.id_Sub.get(), self.result.get())
                             mycursor.execute(sql, val)
                             mydp.commit()
-                            id1 = mycursor.lastrowid  # للحصول على اخر id اضيف للجدول
-                            self.table1.insert('', 'end', values=(self.id_St.get(), self.id_Sub.get(), self.result.get()))
+                            self.table1.insert('', 'end',
+                                               values=(self.id_St.get(), self.id_Sub.get(), self.result.get()))
+                        except :
+                            mb.showerror('Error','رقم الطالب او رقم المادة غير موجود او تم تكرير البيانات')
+                            return 0
+                        try:
+                            sq = "select DataExam from exam , colleges , subject where subject.id ='"+self.id_Sub.get()+"' and subject.id_colleges = colleges.id and colleges.id = exam.id_colleges "
+                            mycursor.execute(sq)
+                            aa = mycursor.fetchone()
+                            aa1 = aa[0].split('/')
+                            aa2 = ''
+                            for i in range(len(aa1)):
+                                if i == 2:
+                                    continue
+                                else:
+                                    aa2 += aa1[i]
+                            today1 = datetime.today()
+                            aa3 = str(today1).split(' ')
+                            aa4 = aa3[0].split('-')
+                            aa5 = ''
+                            for i in range(len(aa4)):
+                                if i == 0:
+                                    continue
+                                else:
+                                    aa5 += aa4[i]
+                            if int(aa2) >= int(aa5):
+                                sql1 = ("delete from students_grades where id_student = '" + self.id_St.get() + "' and id_Subject = '" + self.id_Sub.get() + "' ")
+                                mycursor.execute(sql1)
+                                mydp.commit()
+                                self.read1()
+                                self.Reset1()
+                                mb.showerror('Error', 'لم يتم تقديم المادة')
+                                return 0
                             mb.showinfo("Successfully added", 'Data inserted Successfully', parent=self.master)
                             self.read1()
                             self.Reset1()
                             mydp.close()
                         except:
-                            mb.showerror('error',   'رقم الطالب او رقم المادة غير موجود او تم تكرير المفتاح الرئيسي' , parent=self.master)
+                            mb.showerror("Error",'لم يتم تقديم المادة')
                     else:
                         mb.showerror('Error', "حقل رقم الطالب بياناته غير صحيحة")
                 else:
@@ -469,7 +502,6 @@ class library:
         try:
             sql = ("update students_grades set id_student=%s,id_Subject=%s,result=%s where id_student = '"+ str(self.val[0]) +"' and id_Subject = '"+str(self.val[1]) +"' " )
         except:
-
             mb.showerror('Error', 'لم يتم تجديد سطر')
             return 0
         try:
@@ -480,6 +512,36 @@ class library:
                             val = (self.id_St.get(), self.id_Sub.get(), self.result.get())
                             mycursor.execute(sql, val)
                             mydp.commit()
+                        except:
+                            mb.showerror('Error','رقم الطالب او رقم المادة غير موجود او تم تكرير البيانات')
+                        try:
+                            sq = "select DataExam from exam , colleges , subject where subject.id ='" + self.id_Sub.get() + "' and subject.id_colleges = colleges.id and colleges.id = exam.id_colleges "
+                            mycursor.execute(sq)
+                            aa = mycursor.fetchone()
+                            aa1 = aa[0].split('/')
+                            aa2 = ''
+                            for i in range(len(aa1)):
+                                if i == 2:
+                                    continue
+                                else:
+                                    aa2 += aa1[i]
+                            today1 = datetime.today()
+                            aa3 = str(today1).split(' ')
+                            aa4 = aa3[0].split('-')
+                            aa5 = ''
+                            for i in range(len(aa4)):
+                                if i == 0:
+                                    continue
+                                else:
+                                    aa5 += aa4[i]
+                            if int(aa2) >= int(aa5):
+                                sql1 = ("delete from students_grades where id_student = '" + self.id_St.get() + "' and id_Subject = '" + self.id_Sub.get() + "' ")
+                                mycursor.execute(sql1)
+                                mydp.commit()
+                                self.read1()
+                                self.Reset1()
+                                mb.showerror('Error', 'لم يتم تقديم المادة')
+                                return 0
                             self.read1()
                             self.Reset1()
                             mb.showinfo("Update ", 'Updated successfully', parent=self.master)
