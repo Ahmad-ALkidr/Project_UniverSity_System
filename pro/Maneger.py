@@ -24,7 +24,7 @@ class Maneger:
 class maneger :
     def __init__(self):
         self.master = Toplevel()
-        self.master.title("Add user")
+        self.master.title("(✿◡‿◡)Add user(✿◡‿◡)")
         self.height = self.master.winfo_screenheight()
         self.width = self.master.winfo_screenwidth()
         self.master.geometry("600x600+400+150")

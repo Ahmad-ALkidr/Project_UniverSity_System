@@ -152,5 +152,6 @@ class Login:
 
 if (__name__ == '__main__'):
     window = Tk()
-    std = Login(window)
-    mainloop()
+    # std = Login(window)
+    University(window)
+    window.mainloop()

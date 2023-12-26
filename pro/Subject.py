@@ -20,14 +20,13 @@ class Library:
                                     bg='#1b9ea4', fg='white', padx=10,
                                     pady=10, font=("tahoma", 10, 'bold'))
         self.ButtonLibrary.pack()
-
     def openlibrarywindo(self):
         lib = library()
 
 class library:
     def __init__(self):
         self.master = Toplevel()
-        self.master.title('Subject Management')
+        self.master.title('(✿◡‿◡)Subject Management(✿◡‿◡)')
         self.master.geometry("1200x600+0+0")
         # -------------------------------------------------------#
         #  side  تسمح خاصية باخذ العنصر لاقصى اليسار للوسط
@@ -78,7 +77,6 @@ class library:
 
 
 
-
         # ------------Start right top -----------------------#
         self.frameright = Frame(self.master, width=800,bg='#E5E7E9')
         self.frameright.pack(side=LEFT, fill=BOTH)
@@ -101,7 +99,7 @@ class library:
         self.scrollbar = Scrollbar(self.frameview, orient=VERTICAL)
         self.table = ttk.Treeview(self.frameview,
                                   columns=("ID", "NameSubject", "Units", "StartDate","EndDate","id_teacher","id_collage"),
-                                  show='headings', yscrollcommand=self.scrollbar.set,height=600)
+                                  show='headings', yscrollcommand=self.scrollbar.set)
         self.scrollbar.pack(side=RIGHT, fill=Y)
         self.table.pack(fill=BOTH)
 
@@ -152,8 +150,8 @@ class library:
         self.Show.place(x=255, y=700, width=60, height=60)
         self.Rest = Button(self.frameleft, command=self.Reset, image=self.new_im4, bg='#D0D3D4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
         self.Rest.place(x=330, y=700, width=60, height=60)
-        self.Re = Button(self.frameleft, command=self.registration, text="registration", bg='#D0D3D4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
-        self.Re.place(x=405, y=700, width=80, height=60)
+        self.Re = Button(self.frameright, command=self.registration, text="registration", bg='#D0D3D4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
+        self.Re.place(x=50, y=300, width=80, height=60)
 
 
 

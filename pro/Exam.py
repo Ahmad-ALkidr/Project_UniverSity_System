@@ -31,7 +31,7 @@ class Exam:
 class exam:
     def __init__(self):
         self.master = Toplevel()
-        self.master.title('Exam Management System')
+        self.master.title('(✿◡‿◡)Exam Management System(✿◡‿◡)')
         self.master.geometry("1200x600+0+0")
         # -------------------------------------------------------#
         #  side  تسمح خاصية باخذ العنصر لاقصى اليسار للوسط

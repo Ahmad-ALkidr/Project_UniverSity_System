@@ -11,7 +11,7 @@ import webbrowser as web
 class University():
     def __init__(self, window):
         self.master = window
-        self.master.title("University Management System ")
+        self.master.title("(✿◡‿◡)University Management System(✿◡‿◡)")
         self.height = self.master.winfo_screenheight()
         self.width = self.master.winfo_screenwidth()
         self.master.geometry("{w}x{h}+0+0".format(w=self.width, h=self.height))

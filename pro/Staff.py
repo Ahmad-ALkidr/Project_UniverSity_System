@@ -27,7 +27,7 @@ class Staff:
 class StaffWindow:
     def __init__(self):
         self.master = Toplevel()
-        self.master.title('Staff Management System')
+        self.master.title('(✿◡‿◡)Staff Management System(✿◡‿◡)')
         self.master.geometry("800x600+150+150")
         #  side  تسمح خاصية باخذ العنصر لاقصى اليسار للوسط
         self.frameleft = Frame(self.master, width=400,bg='#1b9ea4')
