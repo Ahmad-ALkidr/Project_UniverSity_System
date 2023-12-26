@@ -12,7 +12,8 @@ class Exam:
     def __init__(self, bottom_frame):
         self.bottomFrame = bottom_frame
         self.examFrame = Frame(self.bottomFrame, pady=10, padx=10)
-        self.examFrame.grid(row=1, column=1, sticky='senw', pady=5) #تعني أن العنصر يتمدد في كل الاتجاهات: شمالًا وجنوبًا
+        self.examFrame.grid(row=1, column=1, sticky='nsew',
+                            pady=5)  # تعني أن العنصر يتمدد في كل الاتجاهات: شمالًا وجنوبًا
         self.img4 = Image.open('image/4662967.png')
         self.img4.thumbnail((150, 150))
         self.new_img4 = ImageTk.PhotoImage(self.img4)
@@ -21,7 +22,7 @@ class Exam:
         self.imgExam.pack()
         self.ButtonExam = Button(self.examFrame, command=self.openexamwindo, text="Exam Management", bg='#1b9ea4',
                                  fg='white', padx=10,
-                                 pady=10, font=("tahoma", 10, 'bold'))
+                                 pady=10, font=("tahoma", 10, 'bold'), bd=5)
         self.ButtonExam.pack()
 
     def openexamwindo(self):
@@ -31,24 +32,24 @@ class Exam:
 class exam:
     def __init__(self):
         self.master = Toplevel()
-        self.master.title('Exam Management System')
+        self.master.title('(✿◡‿◡)Exam Management System(✿◡‿◡)')
         self.master.geometry("1200x600+0+0")
         # -------------------------------------------------------#
         #  side  تسمح خاصية باخذ العنصر لاقصى اليسار للوسط
-        self.frameleft = Frame(self.master, width=400,bg='#1b9ea4')
+        self.frameleft = Frame(self.master, width=400, bg='#1b9ea4')
         self.frameleft.pack(side=LEFT, fill=Y)
         # -------------------------------------------------------#
-        self.nameLable = Label(self.frameleft, text='HallName :', font=('tahoma', 10, 'bold'),width=12)
+        self.nameLable = Label(self.frameleft, text='HallName :', font=('tahoma', 10, 'bold'), width=12)
         self.nameLable.place(x=10, y=20)
-        self.phonLabel = Label(self.frameleft, text='NumClassRoom :', font=('tahoma', 10, 'bold'),width=12)
+        self.phonLabel = Label(self.frameleft, text='NumClassRoom :', font=('tahoma', 10, 'bold'), width=12)
         self.phonLabel.place(x=10, y=80)
-        self.BookLabel = Label(self.frameleft, text='Professor :', font=('tahoma', 10, 'bold'),width=12)
+        self.BookLabel = Label(self.frameleft, text='Professor :', font=('tahoma', 10, 'bold'), width=12)
         self.BookLabel.place(x=10, y=140)
-        self.id_CollegesLabel = Label(self.frameleft, text='id_Colleges :', font=('tahoma', 10, 'bold'),width=12)
+        self.id_CollegesLabel = Label(self.frameleft, text='id_Colleges :', font=('tahoma', 10, 'bold'), width=12)
         self.id_CollegesLabel.place(x=10, y=200)
-        self.DateLabel = Label(self.frameleft, text='Date :', font=('tahoma', 10, 'bold'),width=12)
+        self.DateLabel = Label(self.frameleft, text='Date :', font=('tahoma', 10, 'bold'), width=12)
         self.DateLabel.place(x=10, y=250)
-        self.TimeLabel = Label(self.frameleft, text='Time :', font=('tahoma', 10, 'bold'),width=12)
+        self.TimeLabel = Label(self.frameleft, text='Time :', font=('tahoma', 10, 'bold'), width=12)
         self.TimeLabel.place(x=10, y=500)
 
         # الحصول على \
@@ -59,14 +60,16 @@ class exam:
         self.time = StringVar()
         self.id_Colleges1 = StringVar()
 
-        self.nameGroup = Entry(self.frameleft, fg='#4F4F4F', font=('tahoma', 12, 'bold'), textvariable=self.name)
+        self.nameGroup = Entry(self.frameleft, fg='#4F4F4F', font=('tahoma', 12, 'bold'), textvariable=self.name, bd=2)
         self.nameGroup.place(x=130, y=20, width=250, height=30)
-        self.classRoom = Entry(self.frameleft, fg='#4F4F4F', font=('tahoma', 12, 'bold'), textvariable=self.class1)
+        self.classRoom = Entry(self.frameleft, fg='#4F4F4F', font=('tahoma', 12, 'bold'), textvariable=self.class1,
+                               bd=2)
         self.classRoom.place(x=130, y=80, width=250, height=30)
-        self.professor = Entry(self.frameleft, fg='#4F4F4F', font=('tahoma', 12, 'bold'), textvariable=self.professor1)
+        self.professor = Entry(self.frameleft, fg='#4F4F4F', font=('tahoma', 12, 'bold'), textvariable=self.professor1,
+                               bd=2)
         self.professor.place(x=130, y=140, width=250, height=30)
         self.id_Colleges = Entry(self.frameleft, fg='#4F4F4F', font=('tahoma', 12, 'bold'),
-                                 textvariable=self.id_Colleges1)
+                                 textvariable=self.id_Colleges1, bd=2)
         self.id_Colleges.place(x=130, y=200, width=250, height=30)
 
         # الحصول على تاريخ اليوم
@@ -101,22 +104,31 @@ class exam:
         self.img3.thumbnail((30, 30))
         self.new_im3 = ImageTk.PhotoImage(self.img3)
 
-        self.add = Button(self.frameleft, command=self.add, image=self.new_im0, bg='#D0D3D4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
+        self.add = Button(self.frameleft, command=self.add, image=self.new_im0, bg='#D0D3D4', activeforeground='white',
+                          activebackground='#750E21', font=('tahoma', 10, 'bold'), cursor='plus', bd=15)
         self.add.place(x=30, y=600, width=60, height=60)
-        self.Update = Button(self.frameleft, command=self.update, image=self.new_im1, bg='#D0D3D4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
+        self.Update = Button(self.frameleft, command=self.update, image=self.new_im1, bg='#D0D3D4',
+                             activeforeground='white', activebackground='#750E21', font=('tahoma', 10, 'bold'),
+                             cursor='plus', bd=15)
         self.Update.place(x=105, y=600, width=60, height=60)
-        self.Delete = Button(self.frameleft, command=self.delete, image=self.new_im2, bg='#D0D3D4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='mouse')
+        self.Delete = Button(self.frameleft, command=self.delete, image=self.new_im2, bg='#D0D3D4',
+                             activeforeground='white', activebackground='#750E21', font=('tahoma', 10, 'bold'),
+                             cursor='mouse', bd=15)
         self.Delete.place(x=180, y=600, width=60, height=60)
-        self.Show = Button(self.frameleft, command=self.read, image=self.new_im3, bg='#D0D3D4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
+        self.Show = Button(self.frameleft, command=self.read, image=self.new_im3, bg='#D0D3D4',
+                           activeforeground='white', activebackground='#750E21', font=('tahoma', 10, 'bold'),
+                           cursor='plus', bd=15)
         self.Show.place(x=255, y=600, width=60, height=60)
-        self.Rest = Button(self.frameleft, command=self.Reset, image=self.new_im4, bg='#D0D3D4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
+        self.Rest = Button(self.frameleft, command=self.Reset, image=self.new_im4, bg='#D0D3D4',
+                           activeforeground='white', activebackground='#750E21', font=('tahoma', 10, 'bold'),
+                           cursor='plus', bd=15)
         self.Rest.place(x=330, y=600, width=60, height=60)
 
         # ------------Start right top -----------------------#
         self.frameright = Frame(self.master, width=800, bg='#E5E7E9')
         self.frameright.pack(side=LEFT, fill=Y)
         # ------------Start right top -----------------------#
-        self.framerighttop = Frame(self.frameright, height=50, pady=5, padx=5,bg='#E5E7E9')
+        self.framerighttop = Frame(self.frameright, height=50, pady=5, padx=5, bg='#E5E7E9')
         self.framerighttop.pack(fill=X)
 
         self.searchStudent = Entry(self.framerighttop, fg='#4F4F4F', font=('tahoma', 12, 'bold'), width=110)
@@ -134,7 +146,7 @@ class exam:
         self.scrollbar = Scrollbar(self.frameview, orient=VERTICAL)
         self.table = ttk.Treeview(self.frameview,
                                   columns=(
-                                  "ID", "HallName", "ClassRoom", "Professor", "DataExam", "Time", "id_Colleges"),
+                                      "ID", "HallName", "ClassRoom", "Professor", "DataExam", "Time", "id_Colleges"),
                                   show='headings', yscrollcommand=self.scrollbar.set, height=600)
         self.scrollbar.pack(side=RIGHT, fill=Y)
         self.table.pack(fill=BOTH)
@@ -172,29 +184,34 @@ class exam:
         self.Rest.bind("<Enter>", self.on_enter4)
         self.Rest.bind("<Leave>", self.on_leve4)
 
-    def on_enter(self , ev):
+    def on_enter(self, ev):
         self.add['background'] = '#213363'
-    def on_leve(self , ev):
+
+    def on_leve(self, ev):
         self.add['background'] = '#D0D3D4'
 
-    def on_enter1(self , ev):
+    def on_enter1(self, ev):
         self.Update['background'] = '#213363'
-    def on_leve1(self , ev):
+
+    def on_leve1(self, ev):
         self.Update['background'] = '#D0D3D4'
 
-    def on_enter2(self , ev):
+    def on_enter2(self, ev):
         self.Delete['background'] = '#213363'
-    def on_leve2(self , ev):
+
+    def on_leve2(self, ev):
         self.Delete['background'] = '#D0D3D4'
 
-    def on_enter3(self , ev):
+    def on_enter3(self, ev):
         self.Show['background'] = '#213363'
-    def on_leve3(self , ev):
+
+    def on_leve3(self, ev):
         self.Show['background'] = '#D0D3D4'
 
-    def on_enter4(self , ev):
+    def on_enter4(self, ev):
         self.Rest['background'] = '#213363'
-    def on_leve4(self , ev):
+
+    def on_leve4(self, ev):
         self.Rest['background'] = '#D0D3D4'
 
     def add(self):
@@ -219,22 +236,22 @@ class exam:
                                 mydp.commit()
                                 id1 = mycursor.lastrowid  # للحصول على اخر id اضيف للجدول
                                 self.table.insert('', 'end', values=(
-                                id1, self.nameGroup.get(), self.classRoom.get(), self.professor.get(),
-                                self.DateExam.get_date(), self.Time.get(), self.id_Colleges.get()))
+                                    id1, self.nameGroup.get(), self.classRoom.get(), self.professor.get(),
+                                    self.DateExam.get_date(), self.Time.get(), self.id_Colleges.get()))
                                 mb.showinfo("Successfully added", 'Data inserted Successfully', parent=self.master)
                                 self.read()
                                 self.Reset()
                                 mydp.close()
                             except:
-                                mb.showerror('error', 'الرقم الذي ادخلته غير موجود ياحبيبي')
+                                mb.showerror('error', 'الرقم الذي ادخلته غير موجود ياحبيبي', parent=self.master)
                         else:
-                            mb.showerror('Error', "حقل رقم الكلية بياناته غير صحيحة")
+                            mb.showerror('Error', "حقل رقم الكلية بياناته غير صحيحة", parent=self.master)
                     else:
-                        mb.showerror('Error', "حقل اسم المدرس بياناته غير صحيحة")
+                        mb.showerror('Error', "حقل اسم المدرس بياناته غير صحيحة", parent=self.master)
                 else:
-                    mb.showerror('Error', "حقل classRoom بياناته غير صحيحة")
+                    mb.showerror('Error', "حقل classRoom بياناته غير صحيحة", parent=self.master)
             else:
-                mb.showerror('Error', "حقل اسم الكلية بياناته غير صحيحة")
+                mb.showerror('Error', "حقل اسم الكلية بياناته غير صحيحة", parent=self.master)
 
             # حذف بيانات الEntry
             # self.nameGroup.delete(0, 'end')
@@ -268,12 +285,15 @@ class exam:
         self.iid = self.table.focus()  # الحصول على id الصف المحدد عليه في الجدول
         alldata = self.table.item(self.iid)  # الحصول على العناصر من الصف ووضعها في قاموس
         val = alldata['values']  # قائمة عناصر
-        self.name.set(val[1])
-        self.class1.set(val[2])
-        self.professor1.set(val[3])
-        self.DateExam.selection_set(val[4])
-        self.time.set(val[5])
-        self.id_Colleges1.set(val[6])
+        try:
+            self.name.set(val[1])
+            self.class1.set(val[2])
+            self.professor1.set(val[3])
+            self.DateExam.selection_set(val[4])
+            self.time.set(val[5])
+            self.id_Colleges1.set(val[6])
+        except:
+            mb.showerror('error', 'لم يتم تحديد سطر', parent=self.master)
 
     def Reset(self):
         self.nameGroup.delete(0, 'end')
@@ -289,7 +309,7 @@ class exam:
         try:
             sql = ('delete from exam where id = ' + self.iid)
         except:
-            mb.showerror('Error', 'لم يتم تجديد سطر')
+            mb.showerror('Error', 'لم يتم تجديد سطر', parent=self.master)
             return 0
         try:
             mycursor.execute(sql)
@@ -298,7 +318,7 @@ class exam:
             self.Reset()
             mb.showinfo("Deleted ", 'the Book Deleted', parent=self.master)
         except:
-            mb.showerror('Error', 'لايمكن حذف السجل لارتباطه بجداول اخرى')
+            mb.showerror('Error', 'لايمكن حذف السجل لارتباطه بجداول اخرى', parent=self.master)
 
     def update(self):
         mydp = mc.connect(host='localhost',
@@ -308,9 +328,9 @@ class exam:
         mycursor = mydp.cursor()
         try:
             sql = (
-                        'update exam set GroupName=%s,ClassRoom=%s,Professor=%s,DataExam=%s,Time=%s,id_colleges=%s where id = ' + self.iid)
+                    'update exam set GroupName=%s,ClassRoom=%s,Professor=%s,DataExam=%s,Time=%s,id_colleges=%s where id = ' + self.iid)
         except:
-            mb.showerror('Error', 'لم يتم تجديد سطر')
+            mb.showerror('Error', 'لم يتم تجديد سطر', parent=self.master)
             return 0
         if (len(self.nameGroup.get()) == 0 or len(self.classRoom.get()) == 0 or len(self.professor.get()) == 0 or len(
                 self.DateExam.get_date()) == 0 or len(self.Time.get()) == 0 or len(self.id_Colleges.get()) == 0):
@@ -330,17 +350,17 @@ class exam:
                                     self.Reset()
                                     mb.showinfo("Update ", 'the Exam is Update', parent=self.master)
                                 except:
-                                    mb.showerror('error', 'الرقم الذي ادخلته غير موجود ياحبيبي')
+                                    mb.showerror('error', 'الرقم الذي ادخلته غير موجود ياحبيبي', parent=self.master)
                             else:
-                                mb.showerror('Error', "حقل رقم الكلية بياناته غير صحيحة")
+                                mb.showerror('Error', "حقل رقم الكلية بياناته غير صحيحة", parent=self.master)
                         else:
-                            mb.showerror('Error', "حقل اسم المدرس بياناته غير صحيحة")
+                            mb.showerror('Error', "حقل اسم المدرس بياناته غير صحيحة", parent=self.master)
                     else:
-                        mb.showerror('Error', "حقل classRoom بياناته غير صحيحة")
+                        mb.showerror('Error', "حقل classRoom بياناته غير صحيحة", parent=self.master)
                 else:
-                    mb.showerror('Error', "حقل اسم الكلية بياناته غير صحيحة")
+                    mb.showerror('Error', "حقل اسم الكلية بياناته غير صحيحة", parent=self.master)
             except:
-                mb.showerror('Error', 'رقم الكلية غير موجود في جدول الكلية')
+                mb.showerror('Error', 'رقم الكلية غير موجود في جدول الكلية', parent=self.master)
 
     def search(self):
         mydp = mc.connect(host='localhost',
@@ -360,8 +380,8 @@ class exam:
                     mydp.commit()
                     mydp.close()
                 except:
-                    mb.showerror("Error", "الرقم الذي ادخلته غير موجود")
+                    mb.showerror("Error", "الرقم الذي ادخلته غير موجود", parent=self.master)
             else:
-                mb.showerror("Error", "البيانات التي ادخلتها غير صحيحة")
+                mb.showerror("Error", "البيانات التي ادخلتها غير صحيحة", parent=self.master)
         else:
-            mb.showerror('Error', "لم يتم تحديد قيمة")
+            mb.showerror('Error', "لم يتم تحديد قيمة", parent=self.master)

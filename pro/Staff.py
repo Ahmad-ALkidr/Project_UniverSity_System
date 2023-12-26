@@ -1,23 +1,25 @@
 from tkinter import *
-from PIL import Image,ImageTk
+from PIL import Image, ImageTk
 from tkinter import ttk
 import mysql.connector as mc
 import tkinter.messagebox as mb
 from datetime import datetime
 
+
 class Staff:
-    def __init__(self ,centerFrame):
-        self.centerFrame=centerFrame
+    def __init__(self, centerFrame):
+        self.centerFrame = centerFrame
         self.staffFrame = Frame(self.centerFrame, pady=10, padx=10)
-        self.staffFrame.grid(row=0, column=2,sticky='senw',pady=5)
+        self.staffFrame.grid(row=0, column=2, sticky='nsew', pady=5)
         self.img2 = Image.open('image/8439492.png')
         self.img2.thumbnail((200, 200))
         self.new_img2 = ImageTk.PhotoImage(self.img2)
 
-        self.imgStaff = Label(self.staffFrame, image=self.new_img2,pady=10,padx=10)
+        self.imgStaff = Label(self.staffFrame, image=self.new_img2, pady=10, padx=10)
         self.imgStaff.pack()
-        self.ButtonStaff= Button(self.staffFrame,command=self.opensstaffwindo, text="Staff Management", bg='#1b9ea4', fg='white', padx=10,
-                                       pady=10,font=("tahoma",10 , 'bold'))
+        self.ButtonStaff = Button(self.staffFrame, command=self.opensstaffwindo, text="Staff Management", bg='#1b9ea4',
+                                  fg='white', padx=10,
+                                  pady=10, font=("tahoma", 10, 'bold'), bd=10)
         self.ButtonStaff.pack()
 
     def opensstaffwindo(self):
@@ -27,27 +29,26 @@ class Staff:
 class StaffWindow:
     def __init__(self):
         self.master = Toplevel()
-        self.master.title('Staff Management System')
+        self.master.title('(✿◡‿◡)Staff Management System(✿◡‿◡)')
         self.master.geometry("800x600+150+150")
         #  side  تسمح خاصية باخذ العنصر لاقصى اليسار للوسط
-        self.frameleft = Frame(self.master, width=400,bg='#1b9ea4')
+        self.frameleft = Frame(self.master, width=400, bg='#1b9ea4')
         self.frameleft.pack(side=LEFT, fill=Y)
         # -------------------------------------------------------#
-        self.FirstName = Label(self.frameleft, text='FirstName', font=('tahoma', 10, 'bold'),width=12)
+        self.FirstName = Label(self.frameleft, text='FirstName', font=('tahoma', 10, 'bold'), width=12)
         self.FirstName.place(x=10, y=22)
-        self.LastName = Label(self.frameleft, text='LastName', font=('tahoma', 10, 'bold'),width=12)
+        self.LastName = Label(self.frameleft, text='LastName', font=('tahoma', 10, 'bold'), width=12)
         self.LastName.place(x=10, y=62)
-        self.CIN = Label(self.frameleft, text='CIN', font=('tahoma', 10, 'bold'),width=12)
+        self.CIN = Label(self.frameleft, text='CIN', font=('tahoma', 10, 'bold'), width=12)
         self.CIN.place(x=10, y=102)
-        self.Email = Label(self.frameleft, text='Email', font=('tahoma', 10, 'bold'),width=12)
+        self.Email = Label(self.frameleft, text='Email', font=('tahoma', 10, 'bold'), width=12)
         self.Email.place(x=10, y=142)
-        self.Phone = Label(self.frameleft, text='Phone', font=('tahoma', 10, 'bold'),width=12)
+        self.Phone = Label(self.frameleft, text='Phone', font=('tahoma', 10, 'bold'), width=12)
         self.Phone.place(x=10, y=182)
-        self.Date = Label(self.frameleft, text='Date', font=('tahoma', 10, 'bold'),width=12)
+        self.Date = Label(self.frameleft, text='Date', font=('tahoma', 10, 'bold'), width=12)
         self.Date.place(x=10, y=222)
-        self.Jop = Label(self.frameleft, text='Jop', font=('tahoma', 10, 'bold'),width=12)
+        self.Jop = Label(self.frameleft, text='Jop', font=('tahoma', 10, 'bold'), width=12)
         self.Jop.place(x=10, y=282)
-
 
         # الحصول على \
         # الدالة StringVar() في بايثون هي دالة لإنشاء متغير نصي. يمكن استخدام هذا المتغير لربطه بعناصر واجهة المستخدم الرسومية، مثل الحقول النصية، لإنشاء ربط ديناميكي بين عنصر واجهة المستخدم وبيانات التطبيق.
@@ -59,19 +60,25 @@ class StaffWindow:
         self.date = StringVar()
         self.jopEntry = StringVar()
 
-        self.FirstNameEntry = Entry(self.frameleft, fg='#4F4F4F', font=('tahoma', 12, 'bold'), textvariable=self.first)
+        self.FirstNameEntry = Entry(self.frameleft, fg='#4F4F4F', font=('tahoma', 12, 'bold'), textvariable=self.first,
+                                    bd=2)
         self.FirstNameEntry.place(x=130, y=20, width=250, height=30)
-        self.LastNameEntry = Entry(self.frameleft, fg='#4F4F4F', font=('tahoma', 12, 'bold'), textvariable=self.last)
+        self.LastNameEntry = Entry(self.frameleft, fg='#4F4F4F', font=('tahoma', 12, 'bold'), textvariable=self.last,
+                                   bd=2)
         self.LastNameEntry.place(x=130, y=60, width=250, height=30)
-        self.CINEntry = Entry(self.frameleft, fg='#4F4F4F', font=('tahoma', 12, 'bold'), textvariable=self.cin)
+        self.CINEntry = Entry(self.frameleft, fg='#4F4F4F', font=('tahoma', 12, 'bold'), textvariable=self.cin, bd=2)
         self.CINEntry.place(x=130, y=100, width=250, height=30)
-        self.EmailEntry = Entry(self.frameleft, fg='#4F4F4F', font=('tahoma', 12, 'bold'), textvariable=self.email)
+        self.EmailEntry = Entry(self.frameleft, fg='#4F4F4F', font=('tahoma', 12, 'bold'), textvariable=self.email,
+                                bd=2)
         self.EmailEntry.place(x=130, y=140, width=250, height=30)
-        self.PhoneEntry = Entry(self.frameleft, fg='#4F4F4F', font=('tahoma', 12, 'bold'), textvariable=self.phone)
+        self.PhoneEntry = Entry(self.frameleft, fg='#4F4F4F', font=('tahoma', 12, 'bold'), textvariable=self.phone,
+                                bd=2)
         self.PhoneEntry.place(x=130, y=180, width=250, height=30)
-        self.DateEntry = Entry(self.frameleft, fg='#4F4F4F', font=('tahoma', 12, 'bold'), textvariable=self.date)
+        self.DateEntry = Entry(self.frameleft, fg='#4F4F4F', font=('tahoma', 12, 'bold'), textvariable=self.date, bd=2)
         self.DateEntry.place(x=130, y=220, width=250, height=30)
-        self.JopEntry = ttk.Combobox(self.frameleft, values=['', 'Professor', 'Employee', 'Technicain'],font=('tahoma', 10, 'bold'), width=25 , state='readonly',textvariable=self.jopEntry)
+        self.JopEntry = ttk.Combobox(self.frameleft, values=['', 'Professor', 'Employee', 'Technicain'],
+                                     font=('tahoma', 10, 'bold'), width=25, state='readonly',
+                                     textvariable=self.jopEntry)
         self.JopEntry.place(x=130, y=280)
 
         self.img2 = Image.open('image/delete.png')
@@ -94,28 +101,37 @@ class StaffWindow:
         self.img3.thumbnail((30, 30))
         self.new_im3 = ImageTk.PhotoImage(self.img3)
 
-        self.add = Button(self.frameleft, command=self.add, image=self.new_im0, bg='#D0D3D4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
+        self.add = Button(self.frameleft, command=self.add, image=self.new_im0, bg='#D0D3D4', activeforeground='white',
+                          activebackground='#750E21', font=('tahoma', 10, 'bold'), cursor='plus', bd=15)
         self.add.place(x=30, y=350, width=60, height=60)
-        self.Update = Button(self.frameleft, command=self.update,image=self.new_im1, bg='#D0D3D4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
+        self.Update = Button(self.frameleft, command=self.update, image=self.new_im1, bg='#D0D3D4',
+                             activeforeground='white', activebackground='#750E21', font=('tahoma', 10, 'bold'),
+                             cursor='plus', bd=15)
         self.Update.place(x=105, y=350, width=60, height=60)
-        self.Delete = Button(self.frameleft, command=self.delete, image=self.new_im2, bg='#D0D3D4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='mouse')
+        self.Delete = Button(self.frameleft, command=self.delete, image=self.new_im2, bg='#D0D3D4',
+                             activeforeground='white', activebackground='#750E21', font=('tahoma', 10, 'bold'),
+                             cursor='mouse', bd=15)
         self.Delete.place(x=180, y=350, width=60, height=60)
-        self.Show = Button(self.frameleft, command=self.read, image=self.new_im3, bg='#D0D3D4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
+        self.Show = Button(self.frameleft, command=self.read, image=self.new_im3, bg='#D0D3D4',
+                           activeforeground='white', activebackground='#750E21', font=('tahoma', 10, 'bold'),
+                           cursor='plus', bd=15)
         self.Show.place(x=255, y=350, width=60, height=60)
-        self.Rest = Button(self.frameleft, command=self.Reset, image=self.new_im4, bg='#D0D3D4',activeforeground='white',activebackground='#750E21' , font=('tahoma',10,'bold'),cursor='plus')
+        self.Rest = Button(self.frameleft, command=self.Reset, image=self.new_im4, bg='#D0D3D4',
+                           activeforeground='white', activebackground='#750E21', font=('tahoma', 10, 'bold'),
+                           cursor='plus', bd=15)
         self.Rest.place(x=330, y=350, width=60, height=60)
 
         # ------------Start right top -----------------------#
-        self.frameright = Frame(self.master, width=800,bg='#E5E7E9')
+        self.frameright = Frame(self.master, width=800, bg='#E5E7E9')
         self.frameright.pack(side=LEFT, fill=BOTH)
         # ------------Start right top -----------------------#
-        self.framerighttop = Frame(self.frameright, height=50, pady=5, padx=5,bg='#E5E7E9')
+        self.framerighttop = Frame(self.frameright, height=50, pady=5, padx=5, bg='#E5E7E9')
         self.framerighttop.pack(fill=X)
 
         self.searchStudent = Entry(self.framerighttop, fg='#4F4F4F', font=('tahoma', 12, 'bold'), width=110)
         self.searchStudent.grid(row=0, column=0, sticky='nsew', padx=10, pady=10)
         self.ButtonSearch = Button(self.framerighttop, command=self.search, text="Search", fg='#4F4F4F',
-                                   font=('tahoma', 12, 'bold'), width=50)
+                                   font=('tahoma', 12, 'bold'), width=50, bd=15)
         self.ButtonSearch.grid(row=0, column=1, sticky='nsew', pady=10, padx=10)
 
         self.framerighttop.grid_columnconfigure(0, weight=1)
@@ -126,8 +142,8 @@ class StaffWindow:
         self.frameview.pack(fill=BOTH)
         self.scrollbar = Scrollbar(self.frameview, orient=VERTICAL)
         self.table = ttk.Treeview(self.frameview,
-                                  columns=("ID", "FirstName", "LastName", "CIN", "Email", "Phone", "Date","Jop"),
-                                  show='headings', yscrollcommand=self.scrollbar.set,height=500)
+                                  columns=("ID", "FirstName", "LastName", "CIN", "Email", "Phone", "Date", "Jop"),
+                                  show='headings', yscrollcommand=self.scrollbar.set, height=500)
         self.scrollbar.pack(side=RIGHT, fill=Y)
         self.table.pack(fill=BOTH)
 
@@ -138,16 +154,16 @@ class StaffWindow:
         self.table.heading("Email", text="Email")
         self.table.heading("Phone", text="Phone")
         self.table.heading("Date", text="Date")
-        self.table.heading("Jop",text="Jop")
+        self.table.heading("Jop", text="Jop")
 
         self.table.column("ID", anchor=W, width=10)  # بلظهار القيم في الجدول في الجانب الايسر وضعنا w
-        self.table.column("FirstName", anchor=W , width=140)
-        self.table.column("LastName", anchor=W , width=140)
-        self.table.column("CIN", anchor=W , width=100)
+        self.table.column("FirstName", anchor=W, width=140)
+        self.table.column("LastName", anchor=W, width=140)
+        self.table.column("CIN", anchor=W, width=100)
         self.table.column("Email", anchor=W)
         self.table.column("Phone", anchor=W, width=120)
         self.table.column("Date", anchor=W)
-        self.table.column("Jop" , anchor=W)
+        self.table.column("Jop", anchor=W)
         # self.read()
         self.table.bind('<ButtonRelease>', self.show)
 
@@ -166,29 +182,34 @@ class StaffWindow:
         self.Rest.bind("<Enter>", self.on_enter4)
         self.Rest.bind("<Leave>", self.on_leve4)
 
-    def on_enter(self , ev):
+    def on_enter(self, ev):
         self.add['background'] = '#213363'
-    def on_leve(self , ev):
+
+    def on_leve(self, ev):
         self.add['background'] = '#D0D3D4'
 
-    def on_enter1(self , ev):
+    def on_enter1(self, ev):
         self.Update['background'] = '#213363'
-    def on_leve1(self , ev):
+
+    def on_leve1(self, ev):
         self.Update['background'] = '#D0D3D4'
 
-    def on_enter2(self , ev):
+    def on_enter2(self, ev):
         self.Delete['background'] = '#213363'
-    def on_leve2(self , ev):
+
+    def on_leve2(self, ev):
         self.Delete['background'] = '#D0D3D4'
 
-    def on_enter3(self , ev):
+    def on_enter3(self, ev):
         self.Show['background'] = '#213363'
-    def on_leve3(self , ev):
+
+    def on_leve3(self, ev):
         self.Show['background'] = '#D0D3D4'
 
-    def on_enter4(self , ev):
+    def on_enter4(self, ev):
         self.Rest['background'] = '#213363'
-    def on_leve4(self , ev):
+
+    def on_leve4(self, ev):
         self.Rest['background'] = '#D0D3D4'
 
     def add(self):
@@ -198,18 +219,21 @@ class StaffWindow:
                           database="un")
         mycursor = mydp.cursor()
         sql = 'insert into staff(FirstName,LastName,CIN,Email,Phone,Date,Job) values (%s,%s,%s,%s,%s,%s,%s)'
-        if (self.FirstNameEntry.get() == '' or self.LastNameEntry.get() == '' or self.CINEntry.get() == '' or self.EmailEntry.get() == '' or self.PhoneEntry.get() == '' or self.DateEntry.get() == '' or self.JopEntry.get()==''):
-            mb.showerror('Error', 'all Data is Empty' ,parent = self.master)
+        if (
+                self.FirstNameEntry.get() == '' or self.LastNameEntry.get() == '' or self.CINEntry.get() == '' or self.EmailEntry.get() == '' or self.PhoneEntry.get() == '' or self.DateEntry.get() == '' or self.JopEntry.get() == ''):
+            mb.showerror('Error', 'all Data is Empty', parent=self.master)
         else:
             st = self.EmailEntry.get().find("@gmail.com")
             if self.FirstNameEntry.get().isalpha():
                 if self.LastNameEntry.get().isalpha():
                     if self.CINEntry.get().isdigit():
-                        if (self.EmailEntry.get()[st]=='@' and st !=-1):
+                        if (self.EmailEntry.get()[st] == '@' and st != -1):
                             if self.PhoneEntry.get().isdigit():
                                 if self.is_valid_date(self.DateEntry.get()):
                                     try:
-                                        val = (self.FirstNameEntry.get(), self.LastNameEntry.get(), self.CINEntry.get(),self.EmailEntry.get(), self.PhoneEntry.get(), self.DateEntry.get(),self.JopEntry.get())
+                                        val = (self.FirstNameEntry.get(), self.LastNameEntry.get(), self.CINEntry.get(),
+                                               self.EmailEntry.get(), self.PhoneEntry.get(), self.DateEntry.get(),
+                                               self.JopEntry.get())
                                         mycursor.execute(sql, val)
                                         mydp.commit()
                                         id1 = mycursor.lastrowid  # للحصول على اخر id اضيف للجدول
@@ -218,13 +242,16 @@ class StaffWindow:
                                         row = mycursor.fetchone()
                                         if row[6] == None:
                                             self.delete1(row[6], id1)
-                                            mb.showerror("Error", "التاريخ الذي ادخلته خاطئ يا حبيبي رجاع دخل",parent=self.master)
+                                            mb.showerror("Error", "التاريخ الذي ادخلته خاطئ يا حبيبي رجاع دخل",
+                                                         parent=self.master)
                                         else:
-                                            self.table.insert('', 'end', values=(id1, self.FirstNameEntry.get(), self.LastNameEntry.get(),
+                                            self.table.insert('', 'end', values=(
+                                            id1, self.FirstNameEntry.get(), self.LastNameEntry.get(),
                                             self.CINEntry.get(),
                                             self.EmailEntry.get(), self.PhoneEntry.get(), self.DateEntry.get(),
                                             self.JopEntry.get()))
-                                            mb.showinfo("Successfully added", 'Data inserted Successfully', parent=self.master)
+                                            mb.showinfo("Successfully added", 'Data inserted Successfully',
+                                                        parent=self.master)
                                             # حذف بيانات الEntry
                                             self.read()
                                             self.Reset()
@@ -234,11 +261,12 @@ class StaffWindow:
                                             # print(sqll)
                                             mydp.close()
                                     except:
-                                        mb.showerror('error', 'التاريخ الذي ادخلته غير موجود ياحبيبي', parent=self.master)
+                                        mb.showerror('error', 'التاريخ الذي ادخلته غير موجود ياحبيبي',
+                                                     parent=self.master)
                                 else:
-                                    mb.showerror("Error","التاريخ عير صحيح", parent=self.master)
+                                    mb.showerror("Error", "التاريخ عير صحيح", parent=self.master)
                             else:
-                                mb.showerror('Error',"رقم الجوال غير صحيح", parent=self.master)
+                                mb.showerror('Error', "رقم الجوال غير صحيح", parent=self.master)
                         else:
                             mb.showerror('Error', "الإيميل غير صحيح", parent=self.master)
                     else:
@@ -259,7 +287,8 @@ class StaffWindow:
         myresult = mycursor.fetchall()
         self.table.delete(*self.table.get_children())  # كانت سبب في حدوث خطا اثناء استدعاء الدالة
         for mr in myresult:
-            self.table.insert('', 'end', iid=mr[0],values=mr)  # الحصول على قيمة iidالمفتاح من القاعدة # على علاقة focus مع
+            self.table.insert('', 'end', iid=mr[0],
+                              values=mr)  # الحصول على قيمة iidالمفتاح من القاعدة # على علاقة focus مع
         # execute a select statement to get the date of the last inserted record
         self.iid = None
 
@@ -268,14 +297,16 @@ class StaffWindow:
         self.iid = self.table.focus()  # الحصول على id الصف المحدد عليه في الجدول
         alldata = self.table.item(self.iid)  # الحصول على العناصر من الصف ووضعها في قاموس
         val = alldata['values']  # قائمة عناصر
-        self.first.set(val[1])
-        self.last.set(val[2])
-        self.cin.set(val[3])
-        self.email.set(val[4])
-        self.phone.set(val[5])
-        self.date.set(val[6])
-        self.jopEntry.set(val[7])
-
+        try:
+            self.first.set(val[1])
+            self.last.set(val[2])
+            self.cin.set(val[3])
+            self.email.set(val[4])
+            self.phone.set(val[5])
+            self.date.set(val[6])
+            self.jopEntry.set(val[7])
+        except:
+            mb.showerror('error', 'لم يتم تحديد سطر', parent=self.master)
 
     def Reset(self):
         self.FirstNameEntry.delete(0, 'end')
@@ -295,7 +326,7 @@ class StaffWindow:
         try:
             sql = ('delete from staff where id = ' + self.iid)
         except:
-            mb.showerror('Error', "لم يتم تحديد سطر")
+            mb.showerror('Error', "لم يتم تحديد سطر", parent=self.master)
             return 0
         try:
             mycursor.execute(sql)
@@ -304,7 +335,7 @@ class StaffWindow:
             self.Reset()
             mb.showinfo("Deleted ", 'the Student Deleted', parent=self.master)
         except:
-            mb.showerror('Error','لايمكن حذف السجل لارتباطه بجداول اخرى')
+            mb.showerror('Error', 'لايمكن حذف السجل لارتباطه بجداول اخرى', parent=self.master)
 
         # في حال التاريخ خاطئ
 
@@ -328,12 +359,14 @@ class StaffWindow:
                           database="un")
         mycursor = mydp.cursor()
         try:
-            sql = ('update staff set FirstName=%s,LastName=%s,CIN=%s,Email=%s,Phone=%s,Date=%s,Job = %s where id = ' + self.iid)
+            sql = (
+                        'update staff set FirstName=%s,LastName=%s,CIN=%s,Email=%s,Phone=%s,Date=%s,Job = %s where id = ' + self.iid)
         except:
             mb.showerror('Error', 'لم يتم تحديد سطر')
             return 0
-        if (self.FirstNameEntry.get() == '' or self.LastNameEntry.get() == '' or self.CINEntry.get() == '' or self.EmailEntry.get() == '' or self.PhoneEntry.get() == '' or self.DateEntry.get() == '' or self.JopEntry.get()==''):
-            mb.showerror('Error', 'all Data is Empty' ,parent = self.master)
+        if (
+                self.FirstNameEntry.get() == '' or self.LastNameEntry.get() == '' or self.CINEntry.get() == '' or self.EmailEntry.get() == '' or self.PhoneEntry.get() == '' or self.DateEntry.get() == '' or self.JopEntry.get() == ''):
+            mb.showerror('Error', 'all Data is Empty', parent=self.master)
         else:
             st = self.EmailEntry.get().find("@gmail.com")
             if self.FirstNameEntry.get().isalpha():
@@ -342,14 +375,15 @@ class StaffWindow:
                         if (self.EmailEntry.get()[st] == '@' and st != -1):
                             if self.PhoneEntry.get().isdigit():
                                 if self.is_valid_date(self.DateEntry.get()):
-                                    val = (self.first.get(), self.last.get(), self.cin.get(), self.email.get(), self.phone.get(),self.date.get(), self.JopEntry.get())
+                                    val = (self.first.get(), self.last.get(), self.cin.get(), self.email.get(),
+                                           self.phone.get(), self.date.get(), self.JopEntry.get())
                                     mycursor.execute(sql, val)
                                     mydp.commit()
                                     self.read()
                                     self.Reset()
                                     mb.showinfo("Update ", 'the Staff is Update', parent=self.master)
                                 else:
-                                    mb.showerror('Error',"التاريخ عير صحيح", parent=self.master)
+                                    mb.showerror('Error', "التاريخ عير صحيح", parent=self.master)
                             else:
                                 mb.showerror('Error', "رقم الجوال غير صحيح", parent=self.master)
                         else:
@@ -360,6 +394,7 @@ class StaffWindow:
                     mb.showerror('Error', "الاسم الاخير  غير صحيح", parent=self.master)
             else:
                 mb.showerror('Error', "حقل الاسم الاول بياناته غير صحيحة", parent=self.master)
+
     def search(self):
         mydp = mc.connect(host='localhost',
                           user='root',
@@ -378,16 +413,16 @@ class StaffWindow:
                     mydp.commit()
                     mydp.close()
                 except:
-                    mb.showerror("Error","الرقم الذي ادخلته غير موجود")
+                    mb.showerror("Error", "الرقم الذي ادخلته غير موجود", parent=self.master)
             else:
-                mb.showerror("Error","البيانات التي ادخلتها غير صحيحة")
+                mb.showerror("Error", "البيانات التي ادخلتها غير صحيحة", parent=self.master)
         else:
-            mb.showerror('Error',"لم يتم تحديد قيمة")
-    def is_valid_date(self,date_str):
+            mb.showerror('Error', "لم يتم تحديد قيمة", parent=self.master)
+
+    def is_valid_date(self, date_str):
         try:
             # تحويل النص إلى تاريخ
             datetime_obj = datetime.strptime(date_str, '%Y-%m-%d')  # تنسيق التاريخ (YYYY-MM-DD)
             return True  # إذا كان التحويل ناجحًا، يعني أن البيانات صحيحة
         except ValueError:
             return False  # في حالة حدوث خطأ أثناء التحويل، يعني ذلك أن البيانات غير صحيحة
-
