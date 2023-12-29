@@ -129,7 +129,7 @@ class Login:
         else:
             window = Toplevel()
             uni = University(window)
-            self.master.withdraw()
+            # self.master.withdraw()
             mydp.close()
 
     def on_enter(self, ev):

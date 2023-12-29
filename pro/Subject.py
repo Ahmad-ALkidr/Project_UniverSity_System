@@ -239,16 +239,16 @@ class library:
                                self.EndDate.get_date(), self.id_teacherE.get(), self.id_college.get())
                         mycursor.execute(sql, val)
                         mydp.commit()
-                        id1 = mycursor.lastrowid  # للحصول على اخر id اضيف للجدول
-                        self.table.insert('', 'end', values=(
-                            id1, self.nameSubject.get(), self.unitSubject.get(), self.StartDate.get_date(),
-                            self.EndDate.get_date(), self.id_teacherE.get(), self.id_college.get()))
+                        # id1 = mycursor.lastrowid  # للحصول على اخر id اضيف للجدول
+                        # self.table.insert('', 'end', values=(
+                        #     id1, self.nameSubject.get(), self.unitSubject.get(), self.StartDate.get_date(),
+                        #     self.EndDate.get_date(), self.id_teacherE.get(), self.id_college.get()))
                         mb.showinfo("Successfully added", 'Data inserted Successfully', parent=self.master)
                         self.read()
                         self.Reset()
                         mydp.close()
                     except:
-                        mb.showinfo('Error', " رقم المدرس او رقم الكلية غير صحيح", parent=self.master)
+                        mb.showerror('Error', " رقم المدرس او رقم الكلية غير صحيح", parent=self.master)
                 else:
                     mb.showerror('Error', "عدد الوحدات بياناته غير صحيحة", parent=self.master)
             else:
@@ -319,8 +319,7 @@ class library:
                           database="un")
         mycursor = mydp.cursor()
         try:
-            sql = (
-                    'update subject set Name_Subject=%s,Units=%s,StartDate=%s,EndDate=%s,id_techer=%s,id_colleges=%s where id = ' + self.iid)
+            sql = (' update subject set Name_Subject=%s,Units=%s,StartDate=%s,EndDate=%s,id_techer=%s,id_colleges=%s where id = ' + self.iid)
         except:
             mb.showerror('Error', 'لم يتم تحديد سطر', parent=self.master)
             return 0
@@ -347,10 +346,8 @@ class library:
                     sql = ('select * from Subject where id = ' + self.searchStudent.get())
                     mycursor.execute(sql)
                     myresult = mycursor.fetchone()
-                    self.table.delete(
-                        *self.table.get_children())  # كانت سبب في حدوث خطا اثناء استدعاء الدالة هي لحذف كل سجلات الجدول
+                    self.table.delete(*self.table.get_children())  # كانت سبب في حدوث خطا اثناء استدعاء الدالة هي لحذف كل سجلات الجدول
                     self.table.insert('', 'end', iid=myresult[0], values=myresult)
-                    mydp.commit()
                     mydp.close()
                 except:
                     mb.showerror("Error", "الرقم الذي ادخلته غير موجود", parent=self.master)
@@ -424,13 +421,11 @@ class library:
                 if self.id_Sub.get().isdigit():
                     if self.result.get().isdigit():
                         try:
-                            mycursor = mydp.cursor()
                             sql = 'insert into students_grades(id_Student,id_Subject,result) values (%s,%s,%s)'
                             val = (self.id_St.get(), self.id_Sub.get(), self.result.get())
                             mycursor.execute(sql, val)
                             mydp.commit()
-                            self.table1.insert('', 'end',
-                                               values=(self.id_St.get(), self.id_Sub.get(), self.result.get()))
+                            self.table1.insert('', 'end', values=(self.id_St.get(), self.id_Sub.get(), self.result.get()))
                         except:
                             mb.showerror('Error', 'رقم الطالب او رقم المادة غير موجود او تم تكرير البيانات')
                             return 0
@@ -438,35 +433,43 @@ class library:
                             sq = "select DataExam from exam , colleges , subject where subject.id ='" + self.id_Sub.get() + "' and subject.id_colleges = colleges.id and colleges.id = exam.id_colleges "
                             mycursor.execute(sq)
                             aa = mycursor.fetchone()
-                            aa1 = aa[0].split('/')
-                            aa2 = ''
-                            for i in range(len(aa1)):
-                                if i == 2:
-                                    continue
-                                else:
-                                    aa2 += aa1[i]
-                            today1 = datetime.today()
-                            aa3 = str(today1).split(' ')
-                            aa4 = aa3[0].split('-')
-                            aa5 = ''
-                            for i in range(len(aa4)):
-                                if i == 0:
-                                    continue
-                                else:
-                                    aa5 += aa4[i]
-                            if int(aa2) >= int(aa5):
-                                sql1 = (
-                                        "delete from students_grades where id_student = '" + self.id_St.get() + "' and id_Subject = '" + self.id_Sub.get() + "' ")
+                            if aa == None:
+                                sql1 = ("delete from students_grades where id_student = '" + self.id_St.get() + "' and id_Subject = '" + self.id_Sub.get() + "' ")
                                 mycursor.execute(sql1)
                                 mydp.commit()
                                 self.read1()
                                 self.Reset1()
-                                mb.showerror('Error', 'لم يتم تقديم المادة')
+                                mb.showerror("Error", 'لم يتم تقديم المادة', parent=self.master)
                                 return 0
-                            mb.showinfo("Successfully added", 'Data inserted Successfully', parent=self.master)
-                            self.read1()
-                            self.Reset1()
-                            mydp.close()
+                            else:
+                                aa1 = aa[0].split('/')
+                                aa2 = ''
+                                for i in range(len(aa1)):
+                                    if i == 2:
+                                        continue
+                                    else:
+                                        aa2 += aa1[i]
+                                today1 = datetime.today()
+                                aa3 = str(today1).split(' ')
+                                aa4 = aa3[0].split('-')
+                                aa5 = ''
+                                for i in range(len(aa4)):
+                                    if i == 0:
+                                        continue
+                                    else:
+                                        aa5 += aa4[i]
+                                if int(aa2) >= int(aa5):
+                                    sql1 = ("delete from students_grades where id_student = '" + self.id_St.get() + "' and id_Subject = '" + self.id_Sub.get() + "' ")
+                                    mycursor.execute(sql1)
+                                    mydp.commit()
+                                    self.read1()
+                                    self.Reset1()
+                                    mb.showerror('Error', 'لم يتم تقديم المادة')
+                                    return 0
+                                mb.showinfo("Successfully added", 'Data inserted Successfully', parent=self.master)
+                                self.read1()
+                                self.Reset1()
+                                mydp.close()
                         except:
                             mb.showerror("Error", 'لم يتم تقديم المادة', parent=self.master)
                     else:
@@ -553,6 +556,15 @@ class library:
                             sq = "select DataExam from exam , colleges , subject where subject.id ='" + self.id_Sub.get() + "' and subject.id_colleges = colleges.id and colleges.id = exam.id_colleges "
                             mycursor.execute(sq)
                             aa = mycursor.fetchone()
+                            if aa == None:
+                                sql1 = (
+                                        "delete from students_grades where id_student = '" + self.id_St.get() + "' and id_Subject = '" + self.id_Sub.get() + "' ")
+                                mycursor.execute(sql1)
+                                mydp.commit()
+                                self.read1()
+                                self.Reset1()
+                                mb.showerror('Error', 'لم يتم تقديم المادة', parent=self.master)
+                                return 0
                             aa1 = aa[0].split('/')
                             aa2 = ''
                             for i in range(len(aa1)):

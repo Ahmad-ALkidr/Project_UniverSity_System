@@ -225,7 +225,7 @@ class StudentWindow:
         try:
             f_type = [('Png files','*.png'),('Jpg files', '*.jpg')]
             # فتح نافذة تحديد الملفات
-            self.filenames = filedialog.askopenfilename(filetypes=f_type)
+            self.filenames = filedialog.askopenfilename(filetypes=f_type , parent=self.master)
             # معالجة الملفات
             # قراءة الصورة
             if self.filenames:
